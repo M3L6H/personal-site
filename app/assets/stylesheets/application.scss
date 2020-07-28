@@ -13,7 +13,11 @@
  *= require_self
  */
 
+@import 'semantic-ui-css/semantic.min.css';
+@import "fonts";
+@import "reset";
 @import "colors";
+@import "components";
  
 body {
   background: $dark;
