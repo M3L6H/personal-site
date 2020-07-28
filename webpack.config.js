@@ -2,10 +2,10 @@ const path = require("path");
 
 module.exports = {
   context: __dirname,
-  entry: "./src/index.jsx",
+  entry: "./frontend/index.jsx",
   output: {
-    path: __dirname,
-    filename: "./bundle.js"
+    path: path.resolve(__dirname, "app", "assets", "javascripts"),
+    filename: "bundle.js"
   },
   module: {
     rules: [
