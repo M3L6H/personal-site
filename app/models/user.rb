@@ -19,7 +19,7 @@
 #
 class User < ApplicationRecord
   validates :email, :password_digest, :session_token, :username, presence: true
-  validates :email, :session_token, :username, presence: true
+  validates :email, :session_token, :username, uniqueness: true
 
   validates :username, length: { in: 5..32 }
   
