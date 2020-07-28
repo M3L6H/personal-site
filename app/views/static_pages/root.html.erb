@@ -1,1 +1,7 @@
+<% if logged_in? %>
+  <script type="text/javascript">
+    window.currentDetails = <%= render("user.json.jbuilder", user: current_user).html_safe %>;
+  </script>
+<% end %>
+
 <main id="root">React broke!</main>
