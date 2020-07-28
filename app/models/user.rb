@@ -59,12 +59,17 @@ class User < ApplicationRecord
   end
 
   def reset_session_token!
-    self.update!(session_token: User::generate_session_token)
+    self.update!(session_token: User.generate_session_token)
     self.session_token
   end
 
   def ensure_session_token
-    self.session_token ||= User::generate_session_token
+    self.session_token ||= User.generate_session_token
+  end
+
+  # Methods
+  def is_admin?
+    self.admin
   end
 
   # Custom validators
