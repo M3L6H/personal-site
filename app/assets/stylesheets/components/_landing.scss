@@ -7,7 +7,7 @@
     color: $white;
   }
 
-  .primary {
+  .primary, .primary * {
     color: $primary;
   }
 
@@ -26,6 +26,11 @@
 
       &.primary {
         font-weight: $bold;
+      }
+
+      div {
+        display: inline-block;
+        margin-right: 0.35rem;
       }
     }
   }
