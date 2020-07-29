@@ -18,11 +18,25 @@ module.exports = {
             presets: ["@babel/env", "@babel/react"]
           }
         }
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'svg-url-loader',
+            options: {
+              limit: 10000,
+            }
+          },
+        ],
       }
     ]
   },
   devtool: "source-map",
   resolve: {
-    extensions: [".js", ".jsx", "*"]
+    extensions: [".js", ".jsx", "*"],
+    alias: {
+      images: path.resolve(__dirname, "app", "assets", "images")
+    }
   }
 }

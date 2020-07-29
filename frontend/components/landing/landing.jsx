@@ -5,6 +5,8 @@ import { Container, Header } from 'semantic-ui-react';
 
 import Title from './title';
 
+import name from "images/name.svg";
+
 const firstWords = ["Hi,", "my", "name", "is"];
 const nameWords = ["Michael", "Hollingworth"];
 const secondWords = ["and", "I", "am", "a"];
@@ -19,11 +21,11 @@ const firstLine = {
 };
 const firstLineDelay = firstLine.delay(null, firstWords.length - 1) + pause;
 
-const name = {
+const nameAnim = {
   ...firstLine,
   delay: (_, i) => i * delay + firstLineDelay
 };
-const nameDelay = name.delay(null, nameWords.length - 1) + 2 * pause;
+const nameDelay = nameAnim.delay(null, nameWords.length - 1) + 2 * pause;
 
 const secondLine = {
   ...firstLine,
@@ -38,6 +40,8 @@ const renderWords = (words) => (
 );
 
 export default function Landing() {
+  console.log(`assets/${ name }`, "test");
+  
   return (
     <section className="landing">
       <Container text>
@@ -46,9 +50,9 @@ export default function Landing() {
             { renderWords(firstWords) }
           </Anime>
         </Header>
-        <Header as="h2" className="primary">
-          <Anime { ...name }>
-            { renderWords(nameWords) }
+        <Header as="h2" className="primary" className="name-header">
+          <Anime { ...nameAnim }>
+            <img src={ `assets/${ name }` } alt="Michael Hollingworth" className="name-svg" />
           </Anime>
         </Header>
         <Header as="h2">

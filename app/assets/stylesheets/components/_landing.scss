@@ -10,6 +10,17 @@
   .primary, .primary * {
     color: $primary;
   }
+  
+  .name-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .name-svg {
+      height: 100%;
+      width: 100%;
+    }
+  }
 
   .text.container {
     height: 100%;
