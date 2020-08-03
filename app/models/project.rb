@@ -14,4 +14,5 @@ class Project < ApplicationRecord
   validates :name, length: { maximum: 64 }
 
   has_one_attached :photo
+  has_many :taggings, as: :taggable
 end
