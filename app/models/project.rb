@@ -12,4 +12,6 @@
 class Project < ApplicationRecord
   validates :description, :name, :summary, presence: true
   validates :name, length: { maximum: 64 }
+
+  has_one_attached :photo
 end
