@@ -3,7 +3,27 @@ import ReactDOM from 'react-dom';
 
 import App from './app';
 
+import configureStore from './store/store';
+
 document.addEventListener("DOMContentLoaded", () => {
+  let store;
+
+  if (window.currentDetails) { 
+    const { user } = window.currentDetails;
+    
+    const preloadedState = {
+      entities: {
+        users: { [user.id]: user }
+      },
+      session: { currentUserId: user.id }
+    };
+    
+    store = configureStore(preloadedState);
+    delete window.currentDetails; 
+  } else {
+    store = configureStore();
+  }
+
   // Set up viewport height and width for mobile
   const vh = window.innerHeight * 0.01;
   const vw = window.innerWidth * 0.01;
@@ -11,5 +31,5 @@ document.addEventListener("DOMContentLoaded", () => {
   document.documentElement.style.setProperty("--vw", `${vw}px`);
 
   const root = document.getElementById("root");
-  ReactDOM.render(<App />, root);
+  ReactDOM.render(<App store={ store } />, root);
 });
