@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+
+import { createProject } from '../../actions/projects_actions';
 
 import TextareaAutosize from 'react-textarea-autosize';
 import {
@@ -12,7 +15,7 @@ import {
 
 import { LimitedInput, LimitedTextarea } from '../controls';
 
-export default ({ type }) => {
+const ProjectForm = ({ type, createProject }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [summary, setSummary] = useState("");
@@ -30,10 +33,12 @@ export default ({ type }) => {
     const formData = new FormData();
     formData.append("project[title]", title);
     formData.append("project[description]", description);
-    formData.append("project[summary]", summary || description.splice(0, 1024));
+    formData.append("project[summary]", summary || description.slice(0, 1024));
     formData.append("project[photo]", photo);
+
+    createProject(formData);
   };
-  
+
   return (
     <Container text>
       <Segment attached="top">
@@ -103,7 +108,7 @@ export default ({ type }) => {
           type="submit" 
           fluid 
           positive
-          disabled={ !name || !description || !photo }
+          disabled={ !title || !description || !photo }
         >
           { actionText }          
         </Button>
@@ -111,3 +116,10 @@ export default ({ type }) => {
     </Container>
   );
 };
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  createProject: projectData => dispatch(createProject(projectData)),
+  ...ownProps
+});
+
+export default connect(null, mapDispatchToProps)(ProjectForm);
