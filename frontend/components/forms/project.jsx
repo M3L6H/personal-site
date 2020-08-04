@@ -5,7 +5,9 @@ import {
   Container,
   Form,
   Header,
+  Icon,
   Message,
+  Segment,
   TextArea
 } from 'semantic-ui-react';
 
@@ -38,6 +40,13 @@ export default ({ type }) => {
           label="Summary"
           placeholder="My Awesome Project is a..."
         />
+        <Segment placeholder>
+          <Header icon>
+            <Icon name="file image outline" />
+            No image has been selected
+          </Header>
+          <Button primary>Add Image</Button>
+        </Segment>
         <Button type="submit" fluid positive >
           { actionText }          
         </Button>
