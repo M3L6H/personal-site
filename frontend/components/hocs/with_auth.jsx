@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Auth } from '../forms';
+import { AuthForm } from '../forms';
 
 const mapStateToProps = (state, ownProps)  => ({
   currentUser: state.entities.users[state.session.currentUserId],
@@ -25,7 +25,7 @@ export default (Component, options={}) => {
       }
     } else {
       return (
-        <Auth 
+        <AuthForm 
           type="signin"
           open={ open }
           setOpen={ setOpen }
