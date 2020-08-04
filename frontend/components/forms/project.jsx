@@ -9,11 +9,10 @@ import {
   Container,
   Form,
   Header,
-  Icon,
   Segment
 } from 'semantic-ui-react';
 
-import { LimitedInput, LimitedTextarea } from '../controls';
+import { ImageSelect, LimitedInput, LimitedTextarea } from '../controls';
 
 const ProjectForm = ({ type, createProject }) => {
   const [title, setTitle] = useState("");
@@ -80,29 +79,13 @@ const ProjectForm = ({ type, createProject }) => {
           />
         </Form.Field>
 
-        <Segment placeholder>
-          <Header icon>
-            <Icon name="file image outline" />
-            No image has been selected
-          </Header>
-          <Button 
-            primary
-            onClick={ e => {
-              e.preventDefault();
-              $("#image-input").trigger("click");
-            } }
-          >
-            Add Image
-          </Button>
-          <input 
-            id="image-input" 
-            type="file" 
-            style={{ display: "none" }} 
-            onChange={ (e) => {
-              setPhoto(e.currentTarget.files[0]);
-            } }
+        <Form.Field>
+          <label>Cover Image</label>
+          <ImageSelect
+            value={ photo }
+            onChange={ (_, { value }) => setPhoto(value) }
           />
-        </Segment>
+        </Form.Field>
 
         <Button 
           type="submit" 
