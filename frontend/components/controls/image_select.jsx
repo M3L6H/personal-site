@@ -18,7 +18,9 @@ const ImageSelect = (props) => {
 
   if (val && !loading) {
     return (
-      <Segment>
+      <Segment
+        style={{ marginTop: 0 }}
+      >
         <Image
           src={ photoUrl }
         />
@@ -26,7 +28,11 @@ const ImageSelect = (props) => {
     );
   } else {
     return (
-      <Segment placeholder loading={ loading }>
+      <Segment 
+        placeholder 
+        loading={ loading }
+        style={{ marginTop: 0 }}
+      >
         <Header icon>
           <Icon name="file image outline" />
           No image has been selected
