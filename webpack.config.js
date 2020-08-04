@@ -1,4 +1,5 @@
 const path = require("path");
+const CircularDependencyPlugin = require("circular-dependency-plugin");
 
 module.exports = {
   context: __dirname,
@@ -7,6 +8,14 @@ module.exports = {
     path: path.resolve(__dirname, "app", "assets", "javascripts"),
     filename: "bundle.js"
   },
+  plugins: [
+    new CircularDependencyPlugin({
+      exclude: /a\.js|node_modules/,
+      failOnError: true,
+      allowAsyncCycles: false,
+      cwd: process.cwd()
+    })
+  ],
   module: {
     rules: [
       {
