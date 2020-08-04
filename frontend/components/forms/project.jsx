@@ -7,7 +7,6 @@ import {
   Form,
   Header,
   Icon,
-  Message,
   Segment
 } from 'semantic-ui-react';
 
@@ -17,19 +16,30 @@ export default ({ type }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [summary, setSummary] = useState("");
+  const [photo, setPhoto] = useState(null);
   
   let actionText = "Create Project";
 
   if (type === "edit") {
     actionText = "Update Project";
   }
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("project[title]", title);
+    formData.append("project[description]", description);
+    formData.append("project[summary]", summary || description.splice(0, 1024));
+    formData.append("project[photo]", photo);
+  };
   
   return (
     <Container text>
-      <Message attached="top">
+      <Segment attached="top">
         <Header as="h2" content={ actionText } />
-      </Message>
-      <Form className="attached segment bottom">
+      </Segment>
+      <Form onSubmit={ handleSubmit } className="attached segment bottom">
         <Form.Field required={ type !== "edit" }>
           <label>Title</label>
           <LimitedInput
@@ -70,10 +80,31 @@ export default ({ type }) => {
             <Icon name="file image outline" />
             No image has been selected
           </Header>
-          <Button primary>Add Image</Button>
+          <Button 
+            primary
+            onClick={ e => {
+              e.preventDefault();
+              $("#image-input").trigger("click");
+            } }
+          >
+            Add Image
+          </Button>
+          <input 
+            id="image-input" 
+            type="file" 
+            style={{ display: "none" }} 
+            onChange={ (e) => {
+              setPhoto(e.currentTarget.files[0]);
+            } }
+          />
         </Segment>
 
-        <Button type="submit" fluid positive >
+        <Button 
+          type="submit" 
+          fluid 
+          positive
+          disabled={ !name || !description || !photo }
+        >
           { actionText }          
         </Button>
       </Form>
