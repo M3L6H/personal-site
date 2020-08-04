@@ -10,12 +10,12 @@ const Navbar = (props) => {
 
   return (
     <Menu
-      { ...props }
+      attached={ props.attached }
       inverted
     >
       <Menu.Item
         header
-        color="primary"
+        className="primary"
       >
         { user.username }
       </Menu.Item>
