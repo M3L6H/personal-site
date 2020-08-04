@@ -1,3 +1,7 @@
 .ui.header {
   font-family: $main-font;
 }
+
+.ui.form textarea {
+  resize: none;
+}

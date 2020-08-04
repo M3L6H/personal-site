@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import TextareaAutosize from 'react-textarea-autosize';
 import {
   Button,
   Container,
@@ -7,11 +8,10 @@ import {
   Header,
   Icon,
   Message,
-  Segment,
-  TextArea
+  Segment
 } from 'semantic-ui-react';
 
-import { LimitedInput } from '../controls';
+import { LimitedInput, LimitedTextarea } from '../controls';
 
 export default ({ type }) => {
   const [title, setTitle] = useState("");
@@ -30,32 +30,41 @@ export default ({ type }) => {
         <Header as="h2" content={ actionText } />
       </Message>
       <Form className="attached segment bottom">
-        <Form.Field
-          required={ type !== "edit" }
-        >
+        <Form.Field required={ type !== "edit" }>
           <label>Title</label>
-          <LimitedInput 
-            limit={ 64 } 
-            placeholder="My Awesome Project" 
+          <LimitedInput
+            limit={ 64 }
+            placeholder="My Awesome Project"
             value={ title }
             onChange={ (_, { value }) => setTitle(value) }
           />
         </Form.Field>
-        <Form.Field
-          control={ TextArea }
-          label="Description"
-          placeholder="My Awesome Project is a..."
-          required={ type !== "edit" }
-          value={ description }
-          onChange={ (_, { value }) => setDescription(value) }
-        />
-        <Form.Field
-          control={ TextArea }
-          label="Summary"
-          placeholder={ description.slice(0, 1024) || "My Awesome Project is a..." }
-          value={ summary }
-          onChange={ (_, { value }) => setSummary(value) }
-        />
+
+        <Form.Field required={ type !== "edit" }>
+          <label>Description</label>
+          <TextareaAutosize
+            minRows={ 3 }
+            rows={ 3 }
+            maxRows={ 10 }
+            placeholder="My Awesome Project is a..."
+            value={ description }
+            onChange={ (e) => setDescription(e.currentTarget.value) }
+          />
+        </Form.Field>
+
+        <Form.Field>
+          <label>Summary</label>
+          <LimitedTextarea
+            minRows={ 3 }
+            rows={ 3 }
+            maxRows={ 10 }
+            limit={ 1024 }
+            placeholder={ description.slice(0, 1024) || "My Awesome Project is a..." }
+            value={ summary }
+            onChange={ (e) => setSummary(e.currentTarget.value) }
+          />
+        </Form.Field>
+
         <Segment placeholder>
           <Header icon>
             <Icon name="file image outline" />
@@ -63,6 +72,7 @@ export default ({ type }) => {
           </Header>
           <Button primary>Add Image</Button>
         </Segment>
+
         <Button type="submit" fluid positive >
           { actionText }          
         </Button>
