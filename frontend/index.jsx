@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let store;
 
   if (window.currentDetails) { 
-    const { user } = window.currentDetails;
+    const user = window.currentDetails;
     
     const preloadedState = {
       entities: {
