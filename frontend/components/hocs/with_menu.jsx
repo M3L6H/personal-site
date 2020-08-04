@@ -7,7 +7,7 @@ export default (Component, Menu) => {
     return (
       <>
         <Menu attached="top" />
-        <Segment attached="bottom">
+        <Segment attached="bottom" inverted={ props.inverted }>
           <Component { ...props } />
         </Segment>
       </>

@@ -7,7 +7,9 @@ import Landing from './landing';
 export default () => {
   return (
     <Switch>
-      <Route path="/dashboard" component={ Dashboard } />
+      <Route path="/dashboard">
+        <Dashboard inverted />
+      </Route>
       <Route path="/" component={ Landing } />
     </Switch>
   );
