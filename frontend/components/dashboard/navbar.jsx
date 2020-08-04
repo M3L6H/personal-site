@@ -13,7 +13,12 @@ const Navbar = (props) => {
       { ...props }
       inverted
     >
-      <Menu.Item header>{ user.username }</Menu.Item>
+      <Menu.Item
+        header
+        color="primary"
+      >
+        { user.username }
+      </Menu.Item>
 
       <Menu.Menu position="right">
         { computer ? (
