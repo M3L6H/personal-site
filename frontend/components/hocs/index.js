@@ -1,0 +1,1 @@
+export { default as withAuth } from './with_auth';

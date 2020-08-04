@@ -1,5 +1,5 @@
 import React from 'react';
-import withAuth from '../hocs/with_auth';
+import { withAuth } from '../hocs';
 
 const dashboard = () => {
   return (
