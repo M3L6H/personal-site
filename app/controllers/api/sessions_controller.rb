@@ -10,7 +10,11 @@ class Api::SessionsController < ApplicationController
       login(@user)
       render :create
     else
-      render json: ["Invalid credentials"], status: 422
+      if User.find_by(username: user_params[:username])
+        render json: { password: "Incorrect password" }, status: 422
+      else
+        render json: { username: "A user does not exist with the provided username" }, status: 422
+      end
     end
   end
 
@@ -19,7 +23,7 @@ class Api::SessionsController < ApplicationController
       logout
       render json: {}, status: 200
     else
-      render json: ["Not logged in"], status: 403
+      render json: { errors: "Not logged in" }, status: 403
     end
   end
 end

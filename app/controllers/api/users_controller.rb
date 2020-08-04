@@ -5,7 +5,7 @@ class Api::UsersController < ApplicationController
   
   def show
     if current_user.id != params[:id] && !current_user.is_admin?
-      render json: ["Cannot view another user's profile!"], status: 403
+      render json: { id: ["Cannot view another user's profile!"] }, status: 403
       return
     end
     
@@ -14,7 +14,7 @@ class Api::UsersController < ApplicationController
     if @user
       render :show
     else
-      render json: ["Could not find user with id #{ params[:id] }"], status: 404
+      render json: { id: ["Could not find user with id #{ params[:id] }"] }, status: 404
     end
   end
 
@@ -25,13 +25,13 @@ class Api::UsersController < ApplicationController
       login(@user)
       render :create            
     else
-      render json: @user.errors.full_messages, status: 422
+      render json: convert_errors(@user.errors), status: 422
     end
   end
 
   def destroy
     if current_user.id != params[:id] && !current_user.is_admin? 
-      render json: ["Cannot delete another user!"], status: 403
+      render json: { id: ["Cannot delete another user!"] }, status: 403
       return
     end
 
@@ -41,13 +41,13 @@ class Api::UsersController < ApplicationController
       @user.destroy
       render :destroy
     else
-      render json: ["Could not find user with id #{ params[:id] }"], status: 404
+      render json: { id: ["Could not find user with id #{ params[:id] }"] }, status: 404
     end
   end
 
   def update
-    if !logged_in? || current_user.id != params[:id] 
-      render json: ["Cannot update another user!"], status: 403
+    if current_user.id != params[:id] && !current_user.is_admin? 
+      render json: { id: ["Cannot update another user!"] }, status: 403
       return
     end
     
@@ -57,10 +57,10 @@ class Api::UsersController < ApplicationController
       if @user.update(user_params)
         render :update
       else
-        render json: @user.errors.full_messages, status: 422
+        render json: convert_errors(@user.errors), status: 422
       end
     else
-      render json: ["Could not find user with id #{ params[:id] }"], status: 404
+      render json: { id: ["Could not find user with id #{ params[:id] }"] }, status: 404
     end
   end
 end

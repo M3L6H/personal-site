@@ -38,6 +38,13 @@ class ApplicationController < ActionController::Base
     redirect_back fallback_location: "/" if request.format.html?
   end
   
+  # Utilities
+  def convert_errors(errors)
+    errors.messages.map do |k, v|
+      [k, v.map { |msg| "#{ ActiveSupport::Inflector::humanize(k) } #{ msg }" }]
+    end.to_h
+  end
+  
   # Params
   def user_params
     params.require(:user).permit(:username, :email, :password)
