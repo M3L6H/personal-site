@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { Button, Form, Header, Icon, Message, Modal } from 'semantic-ui-react';
+import {
+  Button,
+  Form,
+  Header,
+  Icon,
+  Message,
+  Modal,
+  Segment
+} from 'semantic-ui-react';
 
 import { createSession } from '../../actions/session_actions';
 
@@ -37,9 +45,9 @@ const Auth = ({ type, open, setOpen, signIn, signUp, message, obstruct }) => {
     >
       <Modal.Content>
         <Modal.Description>
-          <Message attached="top">
+          <Segment attached="top">
             <Header as="h2" content={ actionText } />
-          </Message>
+          </Segment>
           <Form onSubmit={ handleSubmit } className={ className }>
             <Form.Input 
               label="Username or Email"
