@@ -16,15 +16,21 @@ export default (Component, options={}) => {
     const [open, setOpen] = useState(true);
     
     if (props.currentUser) {
-      return (
-        <Component { ...props } />
-      );
+      if (!isAdmin || currentUser.admin) {
+        return (
+          <Component { ...props } />
+        );
+      } else {
+        return <Redirect to="/" />;
+      }
     } else {
       return (
         <Auth 
           type="signin"
           open={ open }
           setOpen={ setOpen }
+          obstruct={ true }
+          message="You must be signed in to access this resource!"
         />
       );
     }

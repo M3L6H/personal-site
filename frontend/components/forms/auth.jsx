@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { Button, Form, Modal } from 'semantic-ui-react';
+import { Button, Form, Header, Icon, Message, Modal } from 'semantic-ui-react';
 
 import { createSession } from '../../actions/session_actions';
 
-const Auth = ({ type, open, setOpen, signIn, signUp }) => {
+const Auth = ({ type, open, setOpen, signIn, signUp, message, obstruct }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,16 +23,24 @@ const Auth = ({ type, open, setOpen, signIn, signUp }) => {
     action({ username, password });
   };
 
+  const className = `attached segment${ message ? "" : " bottom" }`;
+
   return (
     <Modal
+      basic
       onClose={ () => setOpen(false) }
       onOpen={ () => setOpen(true) }
       open={ open }
+      closeOnEscape={ !obstruct }
+      closeOnDimmerClick={ !obstruct }
+      dimmer="blurring"
     >
-      <Modal.Header>{ actionText }</Modal.Header>
       <Modal.Content>
         <Modal.Description>
-          <Form onSubmit={ handleSubmit }>
+          <Message attached="top">
+            <Header as="h2" content={ actionText } />
+          </Message>
+          <Form onSubmit={ handleSubmit } className={ className }>
             <Form.Input 
               label="Username or Email"
               placeholder="jane.doe@example.com"
@@ -53,6 +61,14 @@ const Auth = ({ type, open, setOpen, signIn, signUp }) => {
               type="submit"
             >{ actionText }</Button>
           </Form>
+          { message &&
+            <Message attached="bottom" warning icon>
+              <Icon name="warning" />
+              <Message.Content>
+                { message }
+              </Message.Content>
+            </Message>
+          }
         </Modal.Description>
       </Modal.Content>
     </Modal>
