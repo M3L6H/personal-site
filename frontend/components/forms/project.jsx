@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Button,
@@ -14,6 +14,10 @@ import {
 import { LimitedInput } from '../controls';
 
 export default ({ type }) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [summary, setSummary] = useState("");
+  
   let actionText = "Create Project";
 
   if (type === "edit") {
@@ -26,19 +30,31 @@ export default ({ type }) => {
         <Header as="h2" content={ actionText } />
       </Message>
       <Form className="attached segment bottom">
-        <Form.Field>
+        <Form.Field
+          required={ type !== "edit" }
+        >
           <label>Title</label>
-          <LimitedInput limit={ 64 } placeholder="My Awesome Project" />
+          <LimitedInput 
+            limit={ 64 } 
+            placeholder="My Awesome Project" 
+            value={ title }
+            onChange={ (_, { value }) => setTitle(value) }
+          />
         </Form.Field>
         <Form.Field
           control={ TextArea }
           label="Description"
           placeholder="My Awesome Project is a..."
+          required={ type !== "edit" }
+          value={ description }
+          onChange={ (_, { value }) => setDescription(value) }
         />
         <Form.Field
           control={ TextArea }
           label="Summary"
-          placeholder="My Awesome Project is a..."
+          placeholder={ description.slice(0, 1024) || "My Awesome Project is a..." }
+          value={ summary }
+          onChange={ (_, { value }) => setSummary(value) }
         />
         <Segment placeholder>
           <Header icon>
