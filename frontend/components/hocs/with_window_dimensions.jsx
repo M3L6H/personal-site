@@ -26,11 +26,14 @@ export default (Component) => {
     const [largeScreen, setLargeScreen] = useState(w > COMPUTER);
     const [wideScreen, setWideScreen] = useState(w > LARGE_SCREEN);
     const [ultraWideScreen, setUltraWideScreen] = useState(w > WIDE_SCREEN);
+    console.log(window.innerWidth);
+    console.log(mobile);
 
     // Set up callback
     const updateWindowDimensions = debounce(() => {
       setWindowWidth(window.innerWidth);
       setWindowHeight(window.innerHeight);
+      console.log(window.innerWidth);
 
       const w = window.innerWidth;
       setMobile(w <= MOBILE);

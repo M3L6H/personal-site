@@ -1,7 +1,9 @@
 import React from 'react';
-import { withAuth } from '../hocs';
+import { withAuth, withMenu } from '../hocs';
 
-const dashboard = () => {
+import Navbar from './navbar';
+
+const Dashboard = () => {
   return (
     <div className="dashboard">
       Dashboard
@@ -9,4 +11,4 @@ const dashboard = () => {
   );
 };
 
-export default withAuth(dashboard);
+export default withAuth(withMenu(Dashboard, Navbar));
