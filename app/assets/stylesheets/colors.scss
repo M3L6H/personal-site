@@ -9,4 +9,8 @@ $white: #DADADA;
 
 .ui.inverted.menu .item.primary {
   color: $primary;
+
+  a {
+    color: $primary;
+  }
 }

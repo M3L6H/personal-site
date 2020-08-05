@@ -22,3 +22,7 @@
 body {
   background: $dark;
 }
+
+main#root {
+  overflow-x: hidden;
+}

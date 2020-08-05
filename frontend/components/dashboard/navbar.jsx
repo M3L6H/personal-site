@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { Dropdown, Menu } from 'semantic-ui-react';
 
@@ -17,7 +18,7 @@ const Navbar = (props) => {
         header
         className="primary"
       >
-        { user.username }
+        <Link to="/">{ user.username }</Link>
       </Menu.Item>
 
       <Menu.Menu position="right">
