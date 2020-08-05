@@ -6,7 +6,6 @@ import debounce from '../../util/debouncer';
 
 import TextareaAutosize from 'react-textarea-autosize';
 import {
-  Container,
   Form,
   Header,
   Icon,
@@ -15,7 +14,11 @@ import {
 } from 'semantic-ui-react';
 
 const saveBio = debounce((bio, user, updateUser, setFlash, setSaving) => {
-  updateUser({ ...user, bio })
+  const formData = new FormData();
+  formData.append("user[id]", user.id);
+  formData.append("user[bio]", bio);
+  
+  updateUser(formData)
     .then(({ type }) => {
       if (type === RECEIVE_USERS_ERRORS) {
         setFlash({
