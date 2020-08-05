@@ -6,12 +6,14 @@ import { Dropdown, Menu } from 'semantic-ui-react';
 
 import { withWindowDimensions } from '../hocs';
 
+import { deleteSession } from '../../actions/session_actions';
+
 const Navbar = (props) => {
-  const { user, computer } = props;
+  const { user, computer, attached, signout } = props;
 
   return (
     <Menu
-      attached={ props.attached }
+      attached={ attached }
       inverted
     >
       <Menu.Item
@@ -24,13 +26,14 @@ const Navbar = (props) => {
       <Menu.Menu position="right">
         { computer ? (
           <Menu.Item
+            onClick={ signout }
           >
             Sign Out
           </Menu.Item>
         ) : (
           <Dropdown item icon="bars">
             <Dropdown.Menu>
-              <Dropdown.Item>
+              <Dropdown.Item onClick={ signout }>
                 Sign Out
               </Dropdown.Item>
             </Dropdown.Menu>
@@ -45,4 +48,8 @@ const mapStateToProps = (state) => ({
   user: state.entities.users[state.session.currentUserId]
 });
 
-export default connect(mapStateToProps, null)(withWindowDimensions(Navbar));
+const mapDispatchToProps = (dispatch) => ({
+  signout: () => dispatch(deleteSession())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withWindowDimensions(Navbar));
