@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { AuthForm } from '../forms';
@@ -30,7 +30,9 @@ export default (Component, options={}) => {
           open={ open }
           setOpen={ setOpen }
           obstruct={ true }
-          message="You must be signed in to access this resource!"
+          message={ <>
+            You must be signed in to access this resource! <Link to="/">Click here</Link> to return home.
+          </> }
         />
       );
     }
