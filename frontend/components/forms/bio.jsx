@@ -53,7 +53,7 @@ const BioForm = ({ user, updateUser, setFlash }) => {
   }, [bio]);
 
   return (
-    <Container text>
+    <>
       <Segment attached="top">
         <Header as="h2" style={{ display: "inline-block" }}>
           Bio
@@ -87,7 +87,7 @@ const BioForm = ({ user, updateUser, setFlash }) => {
           } }
         />
       </Form>
-    </Container>
+    </>
   );
 };
 

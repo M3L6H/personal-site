@@ -1,12 +1,17 @@
 import React from 'react';
 import { withAuth, withMenu } from '../hocs';
 
+import { Container } from 'semantic-ui-react';
+
 import Navbar from './navbar';
-import { BioForm } from '../forms';
+import { BioForm, ProfilePhotoForm } from '../forms';
 
 const Dashboard = () => {
   return (
-    <BioForm />
+    <Container text>
+      <ProfilePhotoForm />
+      <BioForm />
+    </Container>
   );
 };
 

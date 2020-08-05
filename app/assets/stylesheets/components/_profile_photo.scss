@@ -1,0 +1,45 @@
+.profile-photo-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 100%;
+  overflow: hidden;
+
+  .profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .profile-photo-msg {
+    $height: 1.8rem;
+    height: $height;
+    font-size: 1rem;
+
+    position: absolute;
+    top: calc(50% - #{ $height / 2 });
+    left: 0;
+    right: 0;
+
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.ui.grid > .column:not(.row).profile-photo-column {
+  display: flex;
+  flex-direction: row-reverse;
+
+  .profile-photo-segment {
+    margin-top: 0;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+  }
+}
