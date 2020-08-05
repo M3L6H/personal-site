@@ -31,8 +31,8 @@ export const deleteUser = (userId) => dispatch => (
     .fail(jqXHR => dispatch(receiveUsersErrors(jqXHR.responseJSON)))
 );
 
-export const updateUser = (user) => dispatch => (
-  UsersUtil.updateUser(user)
+export const updateUser = (userData) => dispatch => (
+  UsersUtil.updateUser(userData)
     .then(res => dispatch(receiveUser(res)))
     .fail(jqXHR => dispatch(receiveUsersErrors(jqXHR.responseJSON)))
 );

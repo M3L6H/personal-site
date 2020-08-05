@@ -14,11 +14,12 @@ export const deleteUser = (userId) => (
   })
 );
 
-export const updateUser = (user) => (
+export const updateUser = (userData) => (
   $.ajax({
     method: "PATCH",
-    url: `/api/users/${ user.id }`,
-    data: { user },
-    dataType: "json"
+    url: `/api/users/${ userData.get("user[id]") }`,
+    data: userData,
+    contentType: false,
+    processData: false
   })
 );
