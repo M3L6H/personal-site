@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from "prop-types";
 
 import TextareaAutosize from 'react-textarea-autosize';
-import { Label } from 'semantic-ui-react';
+import { Container, Label } from 'semantic-ui-react';
 
 const LimitedTextarea = (props) => {
   const { limit, value, onChange } = props;
@@ -11,11 +11,12 @@ const LimitedTextarea = (props) => {
   const val = value || stateValue;
   
   return (
-    <TextareaAutosize 
-      { ...props } 
-      value={ val } 
-      onChange={ onChange || ((_, { value }) => setStateValue(value)) }
-    >
+    <div className="limited-textarea">
+      <TextareaAutosize 
+        { ...props } 
+        value={ val } 
+        onChange={ onChange || ((_, { value }) => setStateValue(value)) }
+      />
       <Label 
         size="tiny" 
         floating
@@ -23,7 +24,7 @@ const LimitedTextarea = (props) => {
       >
         { limit - (val).length }
       </Label>
-    </TextareaAutosize>
+    </div>
   );
 };
 
