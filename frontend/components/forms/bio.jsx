@@ -14,7 +14,24 @@ import {
   Segment
 } from 'semantic-ui-react';
 
-let saveBio;
+const saveBio = debounce((bio, user, updateUser, setFlash, setSaving) => {
+  updateUser({ ...user, bio })
+    .then(({ type }) => {
+      if (type === RECEIVE_USERS_ERRORS) {
+        setFlash({
+          message: "There was an error saving the bio",
+          type: ERROR
+        });
+      } else {
+        setFlash({
+          message: "Bio saved successfully",
+          type: SUCCESS
+        });
+      }
+
+      if (setSaving) setSaving(false);
+    });
+}, 1200);
 
 const BioForm = ({ user, updateUser, setFlash }) => {
   // Should never happen, but just in case
@@ -25,35 +42,14 @@ const BioForm = ({ user, updateUser, setFlash }) => {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    saveBio = debounce((bio) => {
-      updateUser({ ...user, bio })
-        .then(({ type }) => {
-          if (type === RECEIVE_USERS_ERRORS) {
-            setFlash({
-              message: "There was an error saving the bio",
-              type: ERROR
-            });
-          } else {
-            setFlash({
-              message: "Bio saved successfully",
-              type: SUCCESS
-            });
-          }
-
-          setSaving(false);
-        });
-    }, 1200);
-
-    return saveBio;
-  }, []);
-
-  useEffect(() => {
     if (didMountRef.current) {
-      saveBio(bio);
+      saveBio(bio, user, updateUser, setFlash, setSaving);
       setSaving(true);
     } else {
       didMountRef.current = true;
     }
+
+    return () => saveBio(bio, user, updateUser, setFlash);
   }, [bio]);
 
   return (

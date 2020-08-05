@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import { ERROR, SUCCESS } from '../../actions/flash_actions';
 
 import { Message } from 'semantic-ui-react';
 
-export default ({ flash, clearFlash }) => {
+const Flash = ({ flash, clearFlash, location }) => {
   const { message, type, hidden } = flash;
+
+  const prevLocation = useRef();
+  useEffect(() => {
+    if (location !== prevLocation.current && !hidden) {
+      clearFlash();
+    }
+    prevLocation.current = location;
+  }, [location]);
 
   return (
     <Message
@@ -17,3 +26,5 @@ export default ({ flash, clearFlash }) => {
     />
   );
 }
+
+export default withRouter(Flash);
