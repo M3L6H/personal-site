@@ -5,7 +5,14 @@ import { updateUser, RECEIVE_USERS_ERRORS } from '../../actions/users_actions';
 import debounce from '../../util/debouncer';
 
 import TextareaAutosize from 'react-textarea-autosize';
-import { Form, Header, Segment } from 'semantic-ui-react';
+import {
+  Container,
+  Form,
+  Header,
+  Icon,
+  Label,
+  Segment
+} from 'semantic-ui-react';
 
 let saveBio;
 
@@ -35,7 +42,7 @@ const BioForm = ({ user, updateUser, setFlash }) => {
 
           setSaving(false);
         });
-    }, 3000);
+    }, 1200);
 
     return saveBio;
   }, []);
@@ -50,11 +57,27 @@ const BioForm = ({ user, updateUser, setFlash }) => {
   }, [bio]);
 
   return (
-    <>
+    <Container text>
       <Segment attached="top">
-        <Header as="h2">
+        <Header as="h2" style={{ display: "inline-block" }}>
           Bio
         </Header>
+        <Label 
+          color={ saving ? "blue" : "green" } 
+          ribbon="right"
+          style={{
+            position: "absolute",
+            right: 0,
+            left: "auto",
+            transform: "none"
+          }}
+        >
+          { saving ? (
+            <><Icon name="spinner" loading /> Saving...</>
+          ) : (
+            <><Icon name="check" /> Saved</>
+          ) }
+        </Label>
       </Segment>
       <Form className="segment attached bottom">
         <TextareaAutosize
@@ -68,7 +91,7 @@ const BioForm = ({ user, updateUser, setFlash }) => {
           } }
         />
       </Form>
-    </>
+    </Container>
   );
 };
 
