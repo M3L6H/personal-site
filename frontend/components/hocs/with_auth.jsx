@@ -2,11 +2,17 @@ import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { receiveFlash, ERROR } from '../../actions/flash_actions';
+
 import { AuthForm } from '../forms';
 
-const mapStateToProps = (state, ownProps)  => ({
+const mapStateToProps = (state, ownProps) => ({
   currentUser: state.entities.users[state.session.currentUserId],
   ...ownProps
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setFlash: flash => dispatch(receiveFlash(flash))
 });
 
 export default (Component, options={}) => {
@@ -21,6 +27,10 @@ export default (Component, options={}) => {
           <Component { ...props } />
         );
       } else {
+        props.setFlash({
+          message: "You do not have permission to access this!",
+          type: ERROR
+        });
         return <Redirect to="/" />;
       }
     } else {
