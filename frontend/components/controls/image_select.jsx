@@ -55,9 +55,12 @@ const ImageSelect = (props) => {
       <Segment
         style={{ marginTop: 0 }}
       >
-        <Image
-          src={ photoUrl }
-        />
+        <div className="project-image-container">
+          <Image
+            className="project-image"
+            src={ photoUrl }
+          />
+        </div>
       </Segment>
     );
   } else {
@@ -135,7 +138,7 @@ const ImageSelect = (props) => {
             type: "file",
             accept: "image/png, image/jpeg",
             style: { display: "none" },
-            onChange: e => handleFiles(e.currentTarget.files) 
+            onChange: e => handleFiles(e.currentTarget.files, e) 
           }) }
         />
       </Segment>
