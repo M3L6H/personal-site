@@ -47,11 +47,11 @@ const ImageSelect = (props) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   const val = value || stateValue;
-
-  let selector;
+    
+  let contents;
   
   if (val && !loading) {
-    selector = (
+    contents = (
       <Segment
         style={{ marginTop: 0 }}
       >
@@ -61,6 +61,22 @@ const ImageSelect = (props) => {
             src={ photoUrl }
           />
         </div>
+
+        <Divider />
+
+        <Button 
+          primary
+          onClick={ e => {
+            e.preventDefault();
+            e.stopPropagation();
+            $(e.currentTarget)
+              .parent()
+              .parent()
+              .find(".image-input").trigger("click");
+          } }
+        >
+          Change Image
+        </Button>
       </Segment>
     );
   } else {
@@ -88,8 +104,6 @@ const ImageSelect = (props) => {
         </Button>
       </>
     );
-    
-    let contents;
 
     if (isDragActive) {
       contents = (
@@ -122,8 +136,12 @@ const ImageSelect = (props) => {
         contents = buttonOption;
       }
     }
-    
-    selector = (
+  }
+
+  return (
+    <div
+      { ...getRootProps() }
+    >
       <Segment 
         placeholder 
         loading={ loading }
@@ -142,14 +160,6 @@ const ImageSelect = (props) => {
           }) }
         />
       </Segment>
-    );
-  }
-
-  return (
-    <div
-      { ...getRootProps() }
-    >
-      { selector }
     </div>
   );
 };
