@@ -14,7 +14,7 @@ import {
 
 const ProfilePhotoForm = ({ user, setFlash, updateUser }) => {
   const [value, setValue] = useState(null);
-  const [photoUrl, setPhotoUrl] = useState(null);
+  const [photoUrl, setPhotoUrl] = useState(user.photo || null);
   const [loading, setLoading] = useState(false);
 
   const handleFiles = (files) => {
@@ -58,7 +58,7 @@ const ProfilePhotoForm = ({ user, setFlash, updateUser }) => {
 
   let contents;
   
-  if (value && !loading) {
+  if ((value && !loading) || user.photo) {
     contents = (
       <div className="profile-photo-container">
         <Image
@@ -103,8 +103,7 @@ const ProfilePhotoForm = ({ user, setFlash, updateUser }) => {
                 className: "image-input",
                 type: "file",
                 accept: "image/png, image/jpeg",
-                style: { display: "none" },
-                onChange: (e) => handleFiles(e.currentTarget.files) 
+                style: { display: "none" }
               }) }
             />
           </Segment>

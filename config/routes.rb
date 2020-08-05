@@ -9,5 +9,5 @@ Rails.application.routes.draw do
 
   root to: "static_pages#root"
   
-  get "*path", to: "static_pages#root"
+  get "*path", to: "static_pages#root", constraints: -> (req) { !(req.fullpath =~ /^\/rails\/.*/ ) }
 end

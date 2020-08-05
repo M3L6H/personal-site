@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { receiveFlash, ERROR } from '../../actions/flash_actions';
@@ -16,22 +16,25 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default (Component, options={}) => {
-  const { isAdmin } = options;
+  const { requireAdmin } = options;
 
-  return connect(mapStateToProps, null)((props) => {
+  return connect(mapStateToProps, mapDispatchToProps)(withRouter((props) => {
     const [open, setOpen] = useState(true);
+    const { currentUser, setFlash, history } = props;
     
-    if (props.currentUser) {
-      if (!isAdmin || currentUser.admin) {
+    if (currentUser) {
+      if (!requireAdmin || currentUser.admin) {
         return (
           <Component { ...props } />
         );
       } else {
-        props.setFlash({
-          message: "You do not have permission to access this!",
-          type: ERROR
+        history.push("/");
+        setFlash({
+          message: "You do not have permission to access that!",
+          type: ERROR,
+          persist: true
         });
-        return <Redirect to="/" />;
+        return null;
       }
     } else {
       return (
@@ -46,5 +49,5 @@ export default (Component, options={}) => {
         />
       );
     }
-  });
+  }));
 };

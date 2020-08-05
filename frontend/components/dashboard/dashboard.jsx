@@ -15,4 +15,4 @@ const Dashboard = () => {
   );
 };
 
-export default withAuth(withMenu(Dashboard, Navbar));
+export default withAuth(withMenu(Dashboard, Navbar), { requireAdmin: true });
