@@ -7,8 +7,8 @@ export default (state={}, { type, flash }) => {
     case RECEIVE_FLASH:
       return flash;
     case CLEAR_FLASH:
-      return {};
+      return { ...state, hidden: true };
     default:
-      return {};
+      return { ...state, hidden: true };
   }
 };

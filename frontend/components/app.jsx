@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Dashboard from './dashboard';
 import EditButton from './edit_button';
+import Flash from './flash';
 import Landing from './landing';
 
 export default () => {
@@ -12,9 +13,12 @@ export default () => {
         <Route path="/dashboard">
           <Dashboard inverted />
         </Route>
-        <Route path="/" component={ Landing } />
+        <Route path="/">
+          <Landing />
+          <EditButton />
+        </Route>
       </Switch>
-      <EditButton />
+      <Flash />
     </>
   );
 };

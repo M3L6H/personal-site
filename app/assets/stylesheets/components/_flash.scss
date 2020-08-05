@@ -1,0 +1,12 @@
+.ui.message.flash {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(100px);
+  transition: transform 1s;
+
+  &.visible {
+    transform: translateY(0);
+  }
+}
