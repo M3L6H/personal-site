@@ -14,3 +14,9 @@ $white: #DADADA;
     color: $primary;
   }
 }
+
+.ui.inverted {
+  &.segment, &.menu {
+    background: $dark;
+  }
+}
