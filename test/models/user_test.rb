@@ -4,6 +4,7 @@
 #
 #  id              :bigint           not null, primary key
 #  admin           :boolean          default(FALSE), not null
+#  bio             :text             default("")
 #  email           :string           not null
 #  password_digest :string           not null
 #  session_token   :string           not null
