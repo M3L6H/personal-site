@@ -31,6 +31,8 @@ export default class Title extends Component {
   }
 
   componentDidMount() {
+    this.mounted = true;
+
     setTimeout(() => { 
       this.setState({ title: 0 });
       setInterval(this.cycleTitle, 1000); 
@@ -38,10 +40,13 @@ export default class Title extends Component {
   }
   
   componentWillUnmount() {
+    this.mounted = false;
     clearInterval(this.cycleTitle);
   }
 
   cycleTitle() {
+    if (!this.mounted) return;
+    
     this.setState({ title: (this.state.title + 1) % titles.length });
   }
   
