@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     resources :users, except: [:create, :new, :edit, :index]
     resource :session, only: [:create, :destroy]
 
+    # Get the subject of the portfoli
+    get "/subject", to: "users#subject"
+
     resources :projects, except: [:new, :edit]
   end
 

@@ -2,6 +2,12 @@ class Api::UsersController < ApplicationController
   before_action :require_logged_out, only: [:create]
   before_action :require_logged_in, only: [:update, :show, :destroy]
   before_action :require_json
+
+  def subject
+    @user = User.find_by(username: "M3L6H")
+
+    render :show
+  end
   
   def show
     if current_user.id != params[:id] && !current_user.is_admin?
