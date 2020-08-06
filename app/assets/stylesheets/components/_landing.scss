@@ -1,6 +1,6 @@
 .landing {
-  height: calc(100vh + 3px);
-  height: calc(var(--vh, 1vh) * 100 + 3px);
+  height: calc(100vh + 5px);
+  height: calc(var(--vh, 1vh) * 100 + 5px);
   width: 100vw;
   background: $dark;
 
