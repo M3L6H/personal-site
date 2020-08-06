@@ -1,8 +1,9 @@
 .ui.message.flash {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: calc(50vw - min(100vw, #{ $flash-width }) / 2);
+  width: 100vw;
+  max-width: $flash-width;
   transform: translateY(100px);
   transition: transform 1s;
 
