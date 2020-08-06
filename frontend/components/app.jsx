@@ -5,6 +5,7 @@ import Dashboard from './dashboard';
 import EditButton from './edit_button';
 import Flash from './flash';
 import Landing from './landing';
+import About from './about';
 
 export default () => {
   return (
@@ -15,6 +16,7 @@ export default () => {
         </Route>
         <Route path="/">
           <Landing />
+          <About />
           <EditButton />
         </Route>
       </Switch>
