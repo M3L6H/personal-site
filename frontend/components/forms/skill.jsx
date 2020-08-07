@@ -14,7 +14,6 @@ const examples = ["C++", "React", "Rails", "Ruby", "Unity"];
 
 const SkillForm = ({ skills, createSkill, updateSkill, deleteSkill, errors }) => {
   const [skill, setSkill] = useState("");
-  console.log(errors);
 
   const submit = () => {
     createSkill({ name: skill })
