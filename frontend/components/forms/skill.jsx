@@ -10,17 +10,14 @@ import {
 
 import { Button, Form, Header, Icon, Label, Segment, Select } from 'semantic-ui-react';
 
-const examples = ["C++", "React", "Rails", "Ruby", "Unity"];
-const categories = ["language", "technology", "concepts"];
-const colors = ["green", "blue", "orange"];
+import { CATEGORIES, COLORS } from '../../util/constants';
+import capitalize from '../../util/capitalize';
 
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
+const examples = ["C++", "React", "Rails", "Ruby", "Unity"];
 
 const SkillForm = ({ skills, createSkill, updateSkill, deleteSkill, errors }) => {
   const [skill, setSkill] = useState("");
-  const [category, setCategory] = useState(categories[0]);
+  const [category, setCategory] = useState(CATEGORIES[0]);
   const [updating, setUpdating] = useState(null);
 
   const cancelUpdate = () => {
@@ -53,7 +50,7 @@ const SkillForm = ({ skills, createSkill, updateSkill, deleteSkill, errors }) =>
         <Form.Field
           label="Category"
           control={ Select }
-          options={ categories.map(category => (
+          options={ CATEGORIES.map(category => (
             { key: category, value: category, text: capitalize(category)}
           )) }
           value={ category }
@@ -81,7 +78,7 @@ const SkillForm = ({ skills, createSkill, updateSkill, deleteSkill, errors }) =>
           <Label 
             as="a"
             key={ skill.id } 
-            color={ colors[categories.indexOf(skill.category)] }
+            color={ COLORS[CATEGORIES.indexOf(skill.category)] }
             onClick={ () => {
               setSkill(skill.name);
               setCategory(skill.category);
