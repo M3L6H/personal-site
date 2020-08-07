@@ -28,3 +28,7 @@ $white: #DADADA;
 .ui.button.toggle.active, .ui.buttons .button.toggle.active {
   background-color: $primary !important;
 }
+
+.ui.blue.label, .ui.green.label, .ui.purple.label {
+  color: $white !important;
+}

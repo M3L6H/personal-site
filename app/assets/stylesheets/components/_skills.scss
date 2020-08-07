@@ -1,15 +1,46 @@
-.skills {
+.skills-container {
   margin-top: 3rem;
-  
-  .skill {
-    overflow: hidden;
-    transition: all 0.5s;
 
-    &.hide {
-      width: 0;
-      padding: 0;
-      margin: 0;
-      opacity: 0;
+  .ui.header {
+    margin-bottom: 0;
+  }
+  
+  > .ui.segment {
+    margin-top: 0;
+  }
+  
+  .skill-filters {
+    padding-left: 0;
+    padding-right: 0;
+    display: flex;
+    justify-content: center;
+
+    .ui.button {
+      background: $dark;
+      color: $white;
+    }
+  }
+
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    
+    .skill {
+      flex: 1 1 auto;
+      margin: 0.25rem;
+      overflow: hidden;
+      transition: all 0.5s;
+      cursor: default;
+  
+      &.hide {
+        flex-grow: 0;
+        height: 0;
+        width: 0;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+      }
     }
   }
 }
