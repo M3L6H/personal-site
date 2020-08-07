@@ -4,13 +4,14 @@ import { withAuth, withMenu } from '../hocs';
 import { Container } from 'semantic-ui-react';
 
 import Navbar from './navbar';
-import { BioForm, ProfilePhotoForm } from '../forms';
+import { BioForm, ProfilePhotoForm, SkillForm } from '../forms';
 
 const Dashboard = () => {
   return (
     <Container text>
       <ProfilePhotoForm />
       <BioForm />
+      <SkillForm />
     </Container>
   );
 };

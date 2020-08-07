@@ -9,7 +9,7 @@ class Api::SkillsController < ApplicationController
     if @skill.save
       render :create
     else
-      response.json convert_errors(@skill.errors), status: 422
+      render json: convert_errors(@skill.errors), status: 422
     end
   end
 
@@ -20,10 +20,10 @@ class Api::SkillsController < ApplicationController
       if @skill.update(skill_params)
         render :update
       else
-        response.json convert_errors(@skill.errors), status: 422
+        render json: convert_errors(@skill.errors), status: 422
       end
     else
-      response.json { id: ["Could not find skill with id #{ params[:id] }"] }, status: 404
+      render json: { id: ["Could not find skill with id #{ params[:id] }"] }, status: 404
     end
   end
 
@@ -34,7 +34,7 @@ class Api::SkillsController < ApplicationController
       @skill.destroy
       render :destroy
     else
-      response.json { id: ["Could not find skill with id #{ params[:id] }"] }, status: 404
+      render json: { id: ["Could not find skill with id #{ params[:id] }"] }, status: 404
     end
   end
 

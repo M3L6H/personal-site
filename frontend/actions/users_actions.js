@@ -9,9 +9,9 @@ const receiveUser = ({ user }) => ({
   user
 });
 
-const removeUser = (userId) => ({
+const removeUser = ({ id }) => ({
   type: REMOVE_USER,
-  user: { id: userId }
+  user: { id }
 });
 
 const receiveUsersErrors = (errors) => ({

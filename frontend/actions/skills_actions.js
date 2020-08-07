@@ -9,7 +9,7 @@ export const receiveSkill = ({ skill }) => ({
   skill
 });
 
-export const removeSkill = (id) => ({
+export const removeSkill = ({ id }) => ({
   type: REMOVE_SKILL,
   id
 });
