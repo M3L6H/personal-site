@@ -1,15 +1,30 @@
 import React, { useState } from 'react';
 
-import { Button, Header, Segment } from 'semantic-ui-react';
+import { Button, Container, Header, Label, Segment } from 'semantic-ui-react';
 
 import { CATEGORIES, COLORS } from '../../util/constants';
 import capitalize from '../../util/capitalize';
 
+const compare = (a, b) => {
+  if (a.name < b.name) return -1;
+  if (a.name === b.name) return 0;
+  return 1;
+};
+
 export default ({ skills }) => {
   const [active, setActive] = useState(0b000);
 
+  // Sort the skills
+  skills.sort(compare);
+
+  // Filter the skills
+  let filtered = skills.filter(skill => {
+    const n = CATEGORIES.indexOf(skill.category);
+    return active === 0 || (active >> n) & 1 === 1;
+  });
+
   return (
-    <>
+    <Container className="skills">
       <Header as="h2" attached="top">
         Skills
       </Header>
@@ -38,7 +53,17 @@ export default ({ skills }) => {
             }) }
           </Button.Group>
         </Segment>
+
+        { filtered.map(({ category, id, name }) => (
+          <Label
+            key={ id }
+            color={ COLORS[CATEGORIES.indexOf(category)] }
+            size="large"
+          >
+            { name }
+          </Label>
+        )) }
       </Segment>
-    </>
+    </Container>
   );
 };
