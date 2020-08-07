@@ -3,6 +3,10 @@ $dark: #0C1821;
 $primary: #DE6E4B;
 $white: #DADADA;
 
+$pink: #AD82D0;
+$blue: #2454AA;
+$green: #487652;
+
 .primary {
   color: $primary;
 }
@@ -29,6 +33,21 @@ $white: #DADADA;
   background-color: $primary !important;
 }
 
-.ui.blue.label, .ui.green.label, .ui.purple.label {
+.ui.blue.label, .ui.green.label, .ui.pink.label {
   color: $white !important;
+}
+
+.ui.pink.label {
+  background-color: $pink !important;
+  border-color: $pink !important;
+}
+
+.ui.blue.label {
+  background-color: $blue !important;
+  border-color: $blue !important;
+}
+
+.ui.green.label {
+  background-color: $green !important;
+  border-color: $green !important;
 }
