@@ -17,12 +17,6 @@ export default ({ skills }) => {
   // Sort the skills
   skills.sort(compare);
 
-  // Filter the skills
-  let filtered = skills.filter(skill => {
-    const n = CATEGORIES.indexOf(skill.category);
-    return active === 0 || (active >> n) & 1 === 1;
-  });
-
   return (
     <Container className="skills">
       <Header as="h2" attached="top">
@@ -54,11 +48,12 @@ export default ({ skills }) => {
           </Button.Group>
         </Segment>
 
-        { filtered.map(({ category, id, name }) => (
+        { skills.map(({ category, id, name }) => (
           <Label
             key={ id }
             color={ COLORS[CATEGORIES.indexOf(category)] }
             size="large"
+            className={ `skill ${ active === 0 || (active >> CATEGORIES.indexOf(category) & 1 === 1) ? "" : " hide" }` }
           >
             { name }
           </Label>
