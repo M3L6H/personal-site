@@ -16,10 +16,10 @@ export const updateSkill = (skill) => (
   })
 );
 
-export const deleteSkill = (skill) => {
+export const deleteSkill = (id) => {
   $.ajax({
     method: "DELETE",
-    url: `/api/skills/${ skill.id }`,
+    url: `/api/skills/${ id }`,
     dataType: "json"
   }) 
 };
