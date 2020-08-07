@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { Container, Grid, Header, Image, Segment } from 'semantic-ui-react';
 
-export default ({ user }) => {
+export default forwardRef(({ user }, ref) => {
   return (
-    <section className="about">
+    <section className="about" ref={ ref }>
       <Container text>
         <Header size="huge" textAlign="center">
           About
@@ -34,4 +34,4 @@ export default ({ user }) => {
       </Container>
     </section>
   );
-};
+});

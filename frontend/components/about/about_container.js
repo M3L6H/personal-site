@@ -6,4 +6,4 @@ const mapStateToProps = (state) => ({
   user: state.entities.subject
 });
 
-export default connect(mapStateToProps, null)(About);
+export default connect(mapStateToProps, null, null, { forwardRef: true })(About);

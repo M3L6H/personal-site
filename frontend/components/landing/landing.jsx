@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import Anime from 'react-anime';
 
 import anime from 'animejs';
@@ -41,13 +41,13 @@ const renderWords = (words) => (
   ))
 );
 
-export default function Landing() {
+export default forwardRef((_, ref) => {
   useEffect(() => {
     anime(nameAnim);
   }, []);
   
   return (
-    <section className="landing">
+    <section className="landing" ref={ ref }>
       <Container text>
         <Header as="h2">
           <Anime { ...firstLine }>
@@ -108,4 +108,4 @@ export default function Landing() {
       </Container>
     </section>
   );
-}
+});

@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import { Menu } from 'semantic-ui-react';
 
-export default (props) => {
+export default ({ pageRefs }) => {
   const [active, setActive] = useState("home");
   const navRef = useRef(null);
 
@@ -12,7 +12,6 @@ export default (props) => {
   useEffect(() => {
     const bodyRect = document.body.getBoundingClientRect();
     const navRect = navRef.current.getBoundingClientRect();
-
     const eltHeight = navRect.top - bodyRect.top;
     
     const scrollHandler = _.throttle(e => {
@@ -20,6 +19,17 @@ export default (props) => {
         navRef.current.classList.add("stick");
       } else {
         navRef.current.classList.remove("stick");
+      }
+
+      for (let i = pageRefs.length - 1; i >= 0; --i) {
+        if (pageRefs[i].current) {
+          const refRect = pageRefs[i].current.getBoundingClientRect();
+
+          if (window.scrollY >= refRect.top - bodyRect.top) {
+            setActive(menuItems[i]);
+            break;
+          }
+        }
       }
     }, 10);
 
@@ -33,12 +43,22 @@ export default (props) => {
       <div className="navbar-container" ref={ navRef }>
         <Menu inverted className="navbar">
           {
-            menuItems.map(item => (
+            menuItems.map((item, idx) => (
               <Menu.Item
                 key={ item }
                 name={ item }
                 active={ active === item }
-                onClick={ () => setActive(item) }
+                onClick={ () => {
+                  const ref = pageRefs[idx];
+                  const bodyRect = document.body.getBoundingClientRect();
+                  const refRect = ref.current.getBoundingClientRect();
+                  $({ myScrollTop: window.scrollY }).animate({
+                    myScrollTop: refRect.top - bodyRect.top
+                  }, { 
+                    duration: 800,
+                    step: val => window.scrollTo(0, val)
+                  }, () => setActive(item));
+                } }
               />
             ))
           }

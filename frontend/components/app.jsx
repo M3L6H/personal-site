@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 
@@ -12,6 +12,9 @@ import Landing from './landing';
 import Navbar from './navbar';
 
 const App = ({ fetchSubject }) => {
+  const landingRef = useRef(null);
+  const aboutRef = useRef(null);
+  
   useEffect(() => {
     fetchSubject()
   }, []);
@@ -23,9 +26,9 @@ const App = ({ fetchSubject }) => {
           <Dashboard inverted />
         </Route>
         <Route path="/">
-          <Landing />
-          <Navbar />
-          <About />
+          <Landing ref={ landingRef } />
+          <Navbar pageRefs={ [landingRef, aboutRef] } />
+          <About ref={ aboutRef } />
           <EditButton />
         </Route>
       </Switch>
