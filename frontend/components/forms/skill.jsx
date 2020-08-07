@@ -8,7 +8,7 @@ import {
   RECEIVE_SKILLS_ERRORS
 } from '../../actions/skills_actions';
 
-import { Form, Header, Icon, Label, Segment, Select } from 'semantic-ui-react';
+import { Button, Form, Header, Icon, Label, Segment, Select } from 'semantic-ui-react';
 
 const examples = ["C++", "React", "Rails", "Ruby", "Unity"];
 const categories = ["language", "technology", "concepts"];
@@ -21,19 +21,34 @@ function capitalize(str) {
 const SkillForm = ({ skills, createSkill, updateSkill, deleteSkill, errors }) => {
   const [skill, setSkill] = useState("");
   const [category, setCategory] = useState(categories[0]);
+  const [updating, setUpdating] = useState(null);
+
+  const cancelUpdate = () => {
+    setSkill("");
+    setUpdating(null);
+  };
 
   const submit = () => {
-    createSkill({ name: skill, category })
-      .then(({ type }) => {
-        if (type !== RECEIVE_SKILLS_ERRORS) {
-          setSkill("");
-        }
-      });
+    if (!updating) {
+      createSkill({ name: skill, category })
+        .then(({ type }) => {
+          if (type !== RECEIVE_SKILLS_ERRORS) {
+            setSkill("");
+          }
+        });
+    } else {
+      updateSkill({ id: updating.id, name: skill, category })
+        .then(({ type }) => {
+          if (type !== RECEIVE_SKILLS_ERRORS) {
+            cancelUpdate();
+          }
+        });
+    }
   }
 
   return (
     <Segment>
-      <Header as="h2">Skills</Header>
+      <Header as="h2">Skills{ updating && <> (Updating) <Button color="red" size="tiny" compact onClick={ cancelUpdate }>Cancel</Button></> }</Header>
       <Form onSubmit={ submit }>
         <Form.Field
           label="Category"
@@ -64,8 +79,14 @@ const SkillForm = ({ skills, createSkill, updateSkill, deleteSkill, errors }) =>
       <Segment>
         { skills.map(skill => (
           <Label 
+            as="a"
             key={ skill.id } 
             color={ colors[categories.indexOf(skill.category)] }
+            onClick={ () => {
+              setSkill(skill.name);
+              setCategory(skill.category);
+              setUpdating(skill);
+            } }
           >
             { skill.name }
             <Icon 
