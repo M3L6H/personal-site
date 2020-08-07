@@ -6,6 +6,8 @@ import { Button, Container, Header, Label, Segment } from 'semantic-ui-react';
 import { CATEGORIES, COLORS } from '../../util/constants';
 import capitalize from '../../util/capitalize';
 
+import Filter from './filter';
+
 const compare = (a, b) => {
   if (a.name < b.name) return -1;
   if (a.name === b.name) return 0;
@@ -22,6 +24,10 @@ const Skills = ({ skills, computer }) => {
     <Container className="skills-container">
       <Header as="h2" textAlign="center">
         Skills
+
+        { !computer && (
+          <Filter active={ active } setActive={ setActive } />
+        ) }
       </Header>
       <Segment basic>
         { computer && (

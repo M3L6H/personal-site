@@ -1,5 +1,6 @@
 .skills-container {
   margin-top: 3rem;
+  position: relative;
 
   .ui.header {
     margin-bottom: 0;
@@ -42,5 +43,26 @@
         opacity: 0;
       }
     }
+  }
+
+  .skills-filter {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+
+    .menu > .divider {
+      margin: 0;
+    }
+
+    i.icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+
+  .ui.header > .icon {
+    font-size: 0.8em;
   }
 }
