@@ -1,0 +1,23 @@
+.navbar-container {
+  &.stick {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .ui.menu.navbar {
+    margin: 0;
+    border-radius: 0;
+    padding: 0 calc((100vw - 768px) / 2);
+    border-bottom: 2px solid $primary;
+  
+    .item {
+      transition: all 0.5s;
+    }
+  }
+}
+
+.navbar-placeholder {
+  height: 42px;
+}
