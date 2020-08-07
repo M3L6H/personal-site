@@ -8,15 +8,22 @@ import {
   RECEIVE_SKILLS_ERRORS
 } from '../../actions/skills_actions';
 
-import { Form, Header, Icon, Label, Segment } from 'semantic-ui-react';
+import { Form, Header, Icon, Label, Segment, Select } from 'semantic-ui-react';
 
 const examples = ["C++", "React", "Rails", "Ruby", "Unity"];
+const categories = ["language", "technology", "concepts"];
+const colors = ["green", "blue", "orange"];
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
 const SkillForm = ({ skills, createSkill, updateSkill, deleteSkill, errors }) => {
   const [skill, setSkill] = useState("");
+  const [category, setCategory] = useState(categories[0]);
 
   const submit = () => {
-    createSkill({ name: skill })
+    createSkill({ name: skill, category })
       .then(({ type }) => {
         if (type !== RECEIVE_SKILLS_ERRORS) {
           setSkill("");
@@ -28,6 +35,19 @@ const SkillForm = ({ skills, createSkill, updateSkill, deleteSkill, errors }) =>
     <Segment>
       <Header as="h2">Skills</Header>
       <Form onSubmit={ submit }>
+        <Form.Field
+          label="Category"
+          control={ Select }
+          options={ categories.map(category => (
+            { key: category, value: category, text: capitalize(category)}
+          )) }
+          value={ category }
+          onChange={ (_, { value }) => setCategory(value) }
+          error={ errors.category && {
+            content: errors.category.join("\n"),
+            pointing: "below"
+          } }
+        />
         <Form.Input
           placeholder={ examples[Math.floor(Math.random() * examples.length)] }
           onChange={ e => setSkill(e.currentTarget.value) }
@@ -43,7 +63,10 @@ const SkillForm = ({ skills, createSkill, updateSkill, deleteSkill, errors }) =>
       </Form>
       <Segment>
         { skills.map(skill => (
-          <Label key={ skill.id }>
+          <Label 
+            key={ skill.id } 
+            color={ colors[categories.indexOf(skill.category)] }
+          >
             { skill.name }
             <Icon 
               name="delete"
