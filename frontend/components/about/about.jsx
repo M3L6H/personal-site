@@ -2,6 +2,8 @@ import React, { forwardRef } from 'react';
 
 import { Container, Grid, Header, Image, Segment } from 'semantic-ui-react';
 
+import Skills from '../skills';
+
 export default forwardRef(({ user }, ref) => {
   return (
     <section className="about" ref={ ref }>
@@ -32,6 +34,7 @@ export default forwardRef(({ user }, ref) => {
           </Grid.Column>
         </Grid>
       </Container>
+      <Skills />
     </section>
   );
 });

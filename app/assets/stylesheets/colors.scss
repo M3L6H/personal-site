@@ -24,3 +24,7 @@ $white: #DADADA;
 .ui.orange.segment:not(.inverted) {
   border-top-color: $primary !important;
 }
+
+.ui.button.toggle.active, .ui.buttons .button.toggle.active {
+  background-color: $primary !important;
+}
