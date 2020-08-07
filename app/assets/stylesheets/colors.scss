@@ -16,7 +16,7 @@ $white: #DADADA;
 }
 
 .ui.inverted {
-  &.segment, &.menu {
+  &.segment, &.menu, &.attached.header {
     background: $dark;
   }
 }

@@ -19,10 +19,10 @@ export default ({ skills }) => {
 
   return (
     <Container className="skills">
-      <Header as="h2" attached="top">
+      <Header as="h2" attached="top" inverted>
         Skills
       </Header>
-      <Segment attached="bottom">
+      <Segment attached="bottom" inverted>
         <Segment basic>
           <Button
             toggle
