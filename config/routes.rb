@@ -2,9 +2,10 @@ Rails.application.routes.draw do
   namespace :api do
     # For now, we are not interested in creating new users
     resources :users, except: [:create, :new, :edit, :index]
+    resources :skills, only: [:create, :update, :destroy]
     resource :session, only: [:create, :destroy]
 
-    # Get the subject of the portfoli
+    # Get the subject of the portfolio
     get "/subject", to: "users#subject"
 
     resources :projects, except: [:new, :edit]
