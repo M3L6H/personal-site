@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import _ from 'lodash';
+import { withWindowDimensions } from '../hocs';
 
 import { Menu } from 'semantic-ui-react';
 
-export default ({ pageRefs }) => {
+const Navbar = ({ pageRefs }) => {
   const [active, setActive] = useState("home");
   const navRef = useRef(null);
 
@@ -36,7 +37,7 @@ export default ({ pageRefs }) => {
     window.addEventListener("scroll", scrollHandler);
 
     return () => window.removeEventListener("scroll", scrollHandler);
-  }, []);
+  });
   
   return (
     <div className="navbar-placeholder">
@@ -67,3 +68,5 @@ export default ({ pageRefs }) => {
     </div>
   );
 };
+
+export default withWindowDimensions(Navbar);
