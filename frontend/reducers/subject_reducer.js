@@ -1,9 +1,16 @@
+import { RECEIVE_USER } from '../actions/users_actions';
 import { RECEIVE_SUBJECT } from '../actions/subject_actions';
 
-export default (state={}, { type, subject }) => {
+export default (state={}, action) => {
   Object.freeze(state);
 
-  switch(type) {
+  let subject = action.subject;
+  
+  // eslint-disable-next-line
+  switch(action.type) {
+    case RECEIVE_USER:
+      if (!action.user.admin) break;
+      subject = action.user;
     case RECEIVE_SUBJECT:
       return subject;
     default:
