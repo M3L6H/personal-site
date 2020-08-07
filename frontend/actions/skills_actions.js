@@ -2,7 +2,7 @@ import * as APIUtil from '../util/skills_util';
 
 export const RECEIVE_SKILL = "RECEIVE_SKILL";
 export const REMOVE_SKILL = "REMOVE_SKILL";
-export const RECEIVE_SKILLS_ERORRS = "RECEIVE_SKILL_ERRORS";
+export const RECEIVE_SKILLS_ERRORS = "RECEIVE_SKILL_ERRORS";
 
 export const receiveSkill = ({ skill }) => ({
   type: RECEIVE_SKILL,
@@ -15,7 +15,7 @@ export const removeSkill = ({ id }) => ({
 });
 
 export const receiveSkillErrors = (errors) => ({
-  type: RECEIVE_SKILL_ERORRS,
+  type: RECEIVE_SKILLS_ERRORS,
   errors
 });
 
