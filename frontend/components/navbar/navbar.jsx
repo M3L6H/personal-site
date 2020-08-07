@@ -16,8 +16,6 @@ export default (props) => {
     const eltHeight = navRect.top - bodyRect.top;
     
     const scrollHandler = _.throttle(e => {
-      console.log(eltHeight, window.scrollY);
-
       if (eltHeight <= window.scrollY) {
         navRef.current.classList.add("stick");
       } else {
