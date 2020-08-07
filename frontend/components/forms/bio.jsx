@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { receiveFlash, ERROR, SUCCESS } from '../../actions/flash_actions';
 import { updateUser, RECEIVE_USERS_ERRORS } from '../../actions/users_actions';
-import debounce from '../../util/debouncer';
 
 import TextareaAutosize from 'react-textarea-autosize';
 import {
@@ -13,47 +12,52 @@ import {
   Segment
 } from 'semantic-ui-react';
 
-const saveBio = debounce((bio, user, updateUser, setFlash, setSaving) => {
-  const formData = new FormData();
-  formData.append("user[id]", user.id);
-  formData.append("user[bio]", bio);
-  
-  updateUser(formData)
-    .then(({ type }) => {
-      if (type === RECEIVE_USERS_ERRORS) {
-        setFlash({
-          message: "There was an error saving the bio",
-          type: ERROR
-        });
-      } else {
-        setFlash({
-          message: "Bio saved successfully",
-          type: SUCCESS
-        });
-      }
-
-      if (setSaving) setSaving(false);
-    });
-}, 1200);
-
 const BioForm = ({ user, updateUser, setFlash }) => {
   // Should never happen, but just in case
   if (!user) return null;
   
   const didMountRef = useRef(false);
+  const saveTimeout = useRef(null);
   const [bio, setBio] = useState(user.bio);
   const [saving, setSaving] = useState(false);
 
+  // Avoid state updates after component is unmounted
   useEffect(() => {
-    if (didMountRef.current) {
-      saveBio(bio, user, updateUser, setFlash, setSaving);
-      setSaving(true);
-    } else {
-      didMountRef.current = true;
-    }
+    didMountRef.current = true;
+    return () => didMountRef.current = false;
+  }, []);
 
-    return () => saveBio(bio, user, updateUser, setFlash);
-  }, [bio]);
+  const handleChange = e => {
+    setBio(e.currentTarget.value);
+    setSaving(true);
+    clearTimeout(saveTimeout.current);
+
+    // Can't reuse e inside of the setTimeout callback
+    const val = e.currentTarget.value;
+
+    saveTimeout.current = setTimeout(() => {
+      const formData = new FormData();
+      formData.append("user[id]", user.id);
+      formData.append("user[bio]", val);
+      
+      updateUser(formData)
+        .then(({ type }) => {
+          if (type === RECEIVE_USERS_ERRORS) {
+            setFlash({
+              message: "There was an error saving the bio",
+              type: ERROR
+            });
+          } else if (didMountRef.current) {
+            setFlash({
+              message: "Bio saved successfully",
+              type: SUCCESS
+            });
+          }
+    
+          if (didMountRef.current) setSaving(false);
+        });
+    }, 1200)
+  };
 
   return (
     <>
@@ -85,9 +89,7 @@ const BioForm = ({ user, updateUser, setFlash }) => {
           maxRows={ 10 }
           placeholder="You currently don't have a bio. You should add one!"
           value={ bio }
-          onChange={ e => {
-            setBio(e.currentTarget.value);
-          } }
+          onChange={ handleChange }
         />
       </Form>
     </>
