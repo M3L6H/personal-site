@@ -1,4 +1,6 @@
 .navbar-container {
+  z-index: 1;
+  
   &.stick {
     position: fixed;
     top: 0;
