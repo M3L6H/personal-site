@@ -1,8 +1,12 @@
 .about {
+  position: relative;
   min-height: 100vh;
   min-height: calc(var(--vh, 1vh) * 100);
   width: 100vw;
   background: $white;
+
+  display: flex;
+  flex-direction: column;
 
   padding: 6rem 0;
   
@@ -12,6 +16,27 @@
     .column.bio-column {
       display: flex;
       align-items: center;
+    }
+  }
+
+  .resume-section {
+    flex: 1 1 auto;
+    
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    .ui.label.resume-link {
+      margin-top: 3.5rem;
+      background-color: transparent;
+      color: $primary;
+      border: 2px solid $primary;
+      transition: all 0.25s;
+
+      &:hover {
+        background-color: $primary;
+        color: white;
+      }
     }
   }
 }

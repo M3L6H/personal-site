@@ -1,6 +1,15 @@
 import React, { forwardRef } from 'react';
 
-import { Container, Grid, Header, Image, Segment } from 'semantic-ui-react';
+import {
+  Container,
+  Grid,
+  Header,
+  Icon,
+  Image,
+  Label,
+  Popup,
+  Segment
+} from 'semantic-ui-react';
 
 import Skills from '../skills';
 
@@ -35,6 +44,22 @@ export default forwardRef(({ user }, ref) => {
         </Grid>
       </Container>
       <Skills />
+      <div className="resume-section">
+        <Popup
+          content="Click to open in new tab"
+          trigger={
+            <Label
+              as="a"
+              className="resume-link"
+              size="huge"
+              href="/documents/michael-hollingworth-resume.pdf"
+              target="_blank"
+            >
+              <Icon name="file alternate outline" />Resume
+            </Label>
+          }
+        />
+      </div>
     </section>
   );
 });
