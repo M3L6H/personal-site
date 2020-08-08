@@ -7,6 +7,8 @@ class Api::UsersController < ApplicationController
     @user = User.find_by(username: "M3L6H")
     @skills = Skill.all
     @projects = Project.all
+    @tags = Tag.all
+    @taggings = Tagging.all
 
     render :subject
   end
