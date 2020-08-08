@@ -9,6 +9,7 @@ import {
   Button,
   Form,
   Header,
+  Input,
   Segment
 } from 'semantic-ui-react';
 
@@ -16,6 +17,8 @@ import { ImageSelect, LimitedInput, LimitedTextarea } from '../controls';
 
 const ProjectForm = ({ type, createProject, setFlash }) => {
   const [title, setTitle] = useState("");
+  const [live, setLive] = useState("");
+  const [github, setGithub] = useState("");
   const [description, setDescription] = useState("");
   const [summary, setSummary] = useState("");
   const [photo, setPhoto] = useState(null);
@@ -31,9 +34,13 @@ const ProjectForm = ({ type, createProject, setFlash }) => {
 
     const formData = new FormData();
     formData.append("project[title]", title);
+    formData.append("project[live]", live);
+    formData.append("project[github]", github);
     formData.append("project[description]", description);
     formData.append("project[summary]", summary || description.slice(0, 1024));
     formData.append("project[photo]", photo);
+
+    const message = `Project ${ type !== "edit" ? "created" : "updated" } successfully`;
 
     createProject(formData)
       .then(({ type }) => {
@@ -43,7 +50,7 @@ const ProjectForm = ({ type, createProject, setFlash }) => {
           setSummary("");
           setPhoto(null);
           setFlash({
-            message: "Project created successfully",
+            message,
             type: SUCCESS
           });
         }
@@ -63,6 +70,24 @@ const ProjectForm = ({ type, createProject, setFlash }) => {
             placeholder="My Awesome Project"
             value={ title }
             onChange={ (_, { value }) => setTitle(value) }
+          />
+        </Form.Field>
+
+        <Form.Field required={ type !== "edit" }>
+          <label>Live</label>
+          <Input
+            placeholder="example.herokuapp.com"
+            value={ live }
+            onChange={ (_, { value }) => setLive(value) }
+          />
+        </Form.Field>
+
+        <Form.Field required={ type !== "edit" }>
+          <label>Github</label>
+          <Input
+            placeholder="github.com/M3L6H/example"
+            value={ github }
+            onChange={ (_, { value }) => setGithub(value) }
           />
         </Form.Field>
 
