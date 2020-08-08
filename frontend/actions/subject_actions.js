@@ -1,5 +1,7 @@
 import * as APIUtil from '../util/subject_util';
 
+import { fetchCommits } from './github_actions';
+
 export const RECEIVE_SUBJECT = "RECEIVE_SUBJECT";
 
 export const receiveSubject = ({ user, skills, projects }) => ({
@@ -11,5 +13,8 @@ export const receiveSubject = ({ user, skills, projects }) => ({
 
 export const fetchSubject = () => dispatch => (
   APIUtil.fetchSubject()
-    .then(res => dispatch(receiveSubject(res)))
+    .then(res => {
+      dispatch(receiveSubject(res))
+      dispatch(fetchCommits(res.projects))
+    })
 );
