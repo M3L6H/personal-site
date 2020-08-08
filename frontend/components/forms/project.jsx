@@ -73,21 +73,21 @@ const ProjectForm = ({ type, createProject, setFlash }) => {
           />
         </Form.Field>
 
-        <Form.Field>
-          <label>Live</label>
-          <Input
-            placeholder="example.herokuapp.com"
-            value={ live }
-            onChange={ (_, { value }) => setLive(value) }
-          />
-        </Form.Field>
-
         <Form.Field required={ type !== "edit" }>
           <label>Github</label>
           <Input
             placeholder="github.com/M3L6H/example"
             value={ github }
             onChange={ (_, { value }) => setGithub(value) }
+          />
+        </Form.Field>
+
+        <Form.Field>
+          <label>Live</label>
+          <Input
+            placeholder="example.herokuapp.com"
+            value={ live }
+            onChange={ (_, { value }) => setLive(value) }
           />
         </Form.Field>
 
