@@ -8,7 +8,7 @@ export default forwardRef(({ projects }, ref) => {
   return (
     <section className="projects" ref={ ref }>
       <Container>
-        <Header size="huge" textAlign="center">
+        <Header size="huge" textAlign="center" inverted>
           Projects
         </Header>
 

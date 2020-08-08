@@ -6,23 +6,37 @@
 
   padding: 6rem 0;
 
-  .ui.card.project {
-    .image {
-      width: 100%;
-      padding-top: calc(3 / 2 * 100%);
-      overflow: hidden;
-      position: relative;
+  .ui.header {
+    margin-bottom: 3rem;
+  }
 
-      img {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        max-width: none;
+  .projects-container {
+    .ui.card.project {
+      background: $white;
+      
+      .image {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
+        padding-top: calc(3 / 2 * 100%);
+        overflow: hidden;
+        position: relative;
+  
+        img {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          max-width: none;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+  
+      .extra.content {
+        > * {
+          padding-right: 1rem;
+        }
       }
     }
   }

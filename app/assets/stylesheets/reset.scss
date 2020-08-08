@@ -1,5 +1,6 @@
 .ui.header, .header, .field label, .field .ui.input input, textarea, .ui.label,
-.ui.button, .menu .item, .ui.text.container, .ui.input > input {
+.ui.button, .menu .item, .ui.text.container, .ui.input > input, body,
+.ui.card > content > .header, .ui.cards > .card > .content > .header {
   font-family: $main-font;
 }
 

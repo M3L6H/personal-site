@@ -23,6 +23,10 @@ $green: #487652;
   &.segment, &.menu, &.attached.header {
     background: $dark;
   }
+
+  &.header {
+    color: $white;
+  }
 }
 
 .ui.orange.segment:not(.inverted) {
