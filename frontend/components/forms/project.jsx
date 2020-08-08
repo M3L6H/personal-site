@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { createProject } from '../../actions/projects_actions';
+import { createProject, RECEIVE_PROJECT_ERRORS } from '../../actions/projects_actions';
+import { receiveFlash, SUCCESS } from '../../actions/flash_actions';
 
 import TextareaAutosize from 'react-textarea-autosize';
 import {
   Button,
-  Container,
   Form,
   Header,
   Segment
@@ -14,7 +14,7 @@ import {
 
 import { ImageSelect, LimitedInput, LimitedTextarea } from '../controls';
 
-const ProjectForm = ({ type, createProject }) => {
+const ProjectForm = ({ type, createProject, setFlash }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [summary, setSummary] = useState("");
@@ -35,11 +35,23 @@ const ProjectForm = ({ type, createProject }) => {
     formData.append("project[summary]", summary || description.slice(0, 1024));
     formData.append("project[photo]", photo);
 
-    createProject(formData);
+    createProject(formData)
+      .then(({ type }) => {
+        if (type !== RECEIVE_PROJECT_ERRORS) {
+          setTitle("");
+          setDescription("");
+          setSummary("");
+          setPhoto(null);
+          setFlash({
+            message: "Project created successfully",
+            type: SUCCESS
+          });
+        }
+      });
   };
 
   return (
-    <Container text>
+    <>
       <Segment attached="top">
         <Header as="h2" content={ actionText } />
       </Segment>
@@ -96,11 +108,12 @@ const ProjectForm = ({ type, createProject }) => {
           { actionText }          
         </Button>
       </Form>
-    </Container>
+    </>
   );
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
+  setFlash: msg => dispatch(receiveFlash(msg)),
   createProject: projectData => dispatch(createProject(projectData)),
   ...ownProps
 });

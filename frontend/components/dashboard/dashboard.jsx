@@ -4,7 +4,7 @@ import { withAuth, withMenu } from '../hocs';
 import { Container } from 'semantic-ui-react';
 
 import Navbar from './navbar';
-import { BioForm, ProfilePhotoForm, SkillForm } from '../forms';
+import { BioForm, ProfilePhotoForm, ProjectForm, SkillForm } from '../forms';
 
 const Dashboard = () => {
   return (
@@ -12,6 +12,7 @@ const Dashboard = () => {
       <ProfilePhotoForm />
       <BioForm />
       <SkillForm />
+      <ProjectForm />
     </Container>
   );
 };
