@@ -8,6 +8,7 @@ import About from './about';
 import Dashboard from './dashboard';
 import EditButton from './edit_button';
 import Flash from './flash';
+import Footer from './footer';
 
 import Landing from './landing';
 import Navbar from './navbar';
@@ -36,6 +37,7 @@ const App = ({ fetchSubject }) => {
           <About ref={ aboutRef } />
           <Projects ref={ projectsRef } />
           <Contact ref={ contactRef } />
+          <Footer />
           <EditButton />
         </Route>
       </Switch>
