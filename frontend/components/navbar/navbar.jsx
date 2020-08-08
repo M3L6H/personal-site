@@ -9,7 +9,7 @@ const Navbar = ({ pageRefs }) => {
   const containerRef = useRef(null);
   const navRef = useRef(null);
 
-  const menuItems = ["home", "about", "projects"];
+  const menuItems = ["home", "about", "projects", "contact"];
 
   useEffect(() => {
     const bodyRect = document.body.getBoundingClientRect();

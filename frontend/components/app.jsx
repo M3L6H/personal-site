@@ -8,14 +8,17 @@ import About from './about';
 import Dashboard from './dashboard';
 import EditButton from './edit_button';
 import Flash from './flash';
+
 import Landing from './landing';
 import Navbar from './navbar';
 import Projects from './projects';
+import Contact from './contact';
 
 const App = ({ fetchSubject }) => {
   const landingRef = useRef(null);
   const aboutRef = useRef(null);
   const projectsRef = useRef(null);
+  const contactRef = useRef(null);
   
   useEffect(() => {
     fetchSubject()
@@ -29,9 +32,10 @@ const App = ({ fetchSubject }) => {
         </Route>
         <Route path="/">
           <Landing ref={ landingRef } />
-          <Navbar pageRefs={ [landingRef, aboutRef, projectsRef] } />
+          <Navbar pageRefs={ [landingRef, aboutRef, projectsRef, contactRef] } />
           <About ref={ aboutRef } />
           <Projects ref={ projectsRef } />
+          <Contact ref={ contactRef } />
           <EditButton />
         </Route>
       </Switch>
