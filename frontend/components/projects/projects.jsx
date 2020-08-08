@@ -13,8 +13,13 @@ export default forwardRef(({ projects, commits }, ref) => {
 
   const mappedProjects = projects.map(project => ({
     ...project,
-    updated: commits[project.github] ? commits[project.github].commit.author.date : null
+    date: commits[project.github] ? new Date(commits[project.github].commit.author.date) : null
   }));
+
+  mappedProjects.sort(({ date: a }, { date: b }) => {
+    if (!a || !b) return 0;
+    return b - a;
+  });
   
   return (
     <section className="projects" ref={ ref }>
@@ -24,11 +29,10 @@ export default forwardRef(({ projects, commits }, ref) => {
         </Header>
 
         <Card.Group className="projects-container">
-          { mappedProjects.map(({ title, summary, github, live, photo, id, updated }) => {
+          { mappedProjects.map(({ title, summary, github, live, photo, id, date }) => {
             let meta = "Loading...";
 
-            if (updated) {
-              const date = new Date(updated);
+            if (date) {
               const [{ value: month },,{ value: day },,{ value: year }] = 
                 dtf.formatToParts(date);
               meta = `Last Updated: ${ month } ${ day }, ${ year }`;
