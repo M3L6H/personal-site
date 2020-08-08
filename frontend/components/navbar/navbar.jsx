@@ -6,17 +6,18 @@ import { Menu } from 'semantic-ui-react';
 
 const Navbar = ({ pageRefs }) => {
   const [active, setActive] = useState("home");
+  const containerRef = useRef(null);
   const navRef = useRef(null);
 
   const menuItems = ["home", "about", "projects"];
 
   useEffect(() => {
     const bodyRect = document.body.getBoundingClientRect();
-    const navRect = navRef.current.getBoundingClientRect();
+    const navRect = containerRef.current.getBoundingClientRect();
     const eltHeight = navRect.top - bodyRect.top;
     
     const scrollHandler = _.throttle(e => {
-      if (eltHeight <= window.scrollY) {
+      if (window.scrollY >= eltHeight) {
         navRef.current.classList.add("stick");
       } else {
         navRef.current.classList.remove("stick");
@@ -24,7 +25,7 @@ const Navbar = ({ pageRefs }) => {
 
       for (let i = pageRefs.length - 1; i >= 0; --i) {
         if (pageRefs[i].current) {
-          const refRect = pageRefs[i].current.getBoundingClientRect();
+          const refRect = i === 1 ? navRect : pageRefs[i].current.getBoundingClientRect();
 
           if (window.scrollY >= refRect.top - bodyRect.top) {
             setActive(menuItems[i]);
@@ -40,7 +41,7 @@ const Navbar = ({ pageRefs }) => {
   });
   
   return (
-    <div className="navbar-placeholder">
+    <div className="navbar-placeholder" ref={ containerRef }>
       <div className="navbar-container" ref={ navRef }>
         <Menu inverted className="navbar">
           {
@@ -58,7 +59,7 @@ const Navbar = ({ pageRefs }) => {
                   }, { 
                     duration: 800,
                     step: val => window.scrollTo(0, val)
-                  }, () => setActive(item));
+                  });
                 } }
               />
             ))
