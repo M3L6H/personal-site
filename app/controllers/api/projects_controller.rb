@@ -12,8 +12,22 @@ class Api::ProjectsController < ApplicationController
     end
   end
 
+  def update
+    @project = Project.find_by(id: params[:id])
+
+    if @project
+      if @project.update(project_params)
+        render :update
+      else
+        render json: convert_errors(@project.errors), status: 422
+      end
+    else
+      render json: { id: ["Could not find project with id #{ params[:id] }"] }, status: 404
+    end
+  end
+
 private
   def project_params
-    params.require(:project).permit(:title, :description, :summary, :photo)
+    params.require(:project).permit(:title, :description, :summary, :photo, :live, :github)
   end
 end
