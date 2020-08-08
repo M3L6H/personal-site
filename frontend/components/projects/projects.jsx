@@ -1,16 +1,10 @@
 import React, { forwardRef } from 'react';
 
-import { Card, Container, Header, Icon } from 'semantic-ui-react';
+import { Card, Container, Header } from 'semantic-ui-react';
 
-import truncate from '../../util/truncate';
+import ProjectCard from './project_card';
 
 export default forwardRef(({ projects, commits }, ref) => {
-  const dtf = new Intl.DateTimeFormat("en", { 
-    year: "numeric", 
-    month: "short",
-    day: "2-digit"
-  });
-
   const mappedProjects = projects.map(project => ({
     ...project,
     date: commits[project.github] ? new Date(commits[project.github].commit.author.date) : null
@@ -29,38 +23,9 @@ export default forwardRef(({ projects, commits }, ref) => {
         </Header>
 
         <Card.Group className="projects-container">
-          { mappedProjects.map(({ title, summary, github, live, photo, id, date }) => {
-            let meta = "Loading...";
-
-            if (date) {
-              const [{ value: month },,{ value: day },,{ value: year }] = 
-                dtf.formatToParts(date);
-              meta = `Last Updated: ${ month } ${ day }, ${ year }`;
-            }
-            
-            return (<Card
-                key={ id }
-                className="project"
-                image={ photo }
-                header={ title }
-                meta={ meta }
-                description={ truncate(summary) }
-                extra={ <>
-                  <a href={ github } target="_blank">
-                    <Icon name="github" />
-                    Github
-                  </a>
-
-                  { live &&
-                    <a href={ live } target="_blank">
-                      <Icon name="external" />
-                      Live
-                    </a>
-                  }
-                </> }
-              />
-            );
-          }) }
+          { mappedProjects.map((project) => (
+            <ProjectCard { ...project } key={ project.id } />
+          )) }
         </Card.Group>
       </Container>
     </section>
