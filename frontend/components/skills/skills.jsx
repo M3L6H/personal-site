@@ -22,7 +22,7 @@ const Skills = ({ skills, computer }) => {
 
   return (
     <Container className="skills-container">
-      <Header as="h2" textAlign="center">
+      <Header size="large" textAlign="center">
         Skills
 
         { !computer && (
