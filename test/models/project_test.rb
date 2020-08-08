@@ -5,7 +5,7 @@
 #  id          :bigint           not null, primary key
 #  description :text             not null
 #  github      :string           not null
-#  live        :string           not null
+#  live        :string
 #  summary     :text             not null
 #  title       :string(64)       not null
 #  created_at  :datetime         not null

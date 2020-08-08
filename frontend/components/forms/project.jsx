@@ -73,7 +73,7 @@ const ProjectForm = ({ type, createProject, setFlash }) => {
           />
         </Form.Field>
 
-        <Form.Field required={ type !== "edit" }>
+        <Form.Field>
           <label>Live</label>
           <Input
             placeholder="example.herokuapp.com"
