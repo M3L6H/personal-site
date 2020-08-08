@@ -2,10 +2,11 @@ import * as APIUtil from '../util/subject_util';
 
 export const RECEIVE_SUBJECT = "RECEIVE_SUBJECT";
 
-export const receiveSubject = ({ user, skills }) => ({
+export const receiveSubject = ({ user, skills, projects }) => ({
   type: RECEIVE_SUBJECT,
   subject: user,
-  skills
+  skills,
+  projects
 });
 
 export const fetchSubject = () => dispatch => (

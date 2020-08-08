@@ -6,6 +6,7 @@ class Api::UsersController < ApplicationController
   def subject
     @user = User.find_by(username: "M3L6H")
     @skills = Skill.all
+    @projects = Project.all
 
     render :subject
   end
