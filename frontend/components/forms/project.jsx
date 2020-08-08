@@ -17,8 +17,8 @@ import { ImageSelect, LimitedInput, LimitedTextarea } from '../controls';
 
 const ProjectForm = ({ type, createProject, setFlash }) => {
   const [title, setTitle] = useState("");
-  const [live, setLive] = useState("");
   const [github, setGithub] = useState("");
+  const [live, setLive] = useState("");
   const [description, setDescription] = useState("");
   const [summary, setSummary] = useState("");
   const [photo, setPhoto] = useState(null);
@@ -46,6 +46,8 @@ const ProjectForm = ({ type, createProject, setFlash }) => {
       .then(({ type }) => {
         if (type !== RECEIVE_PROJECT_ERRORS) {
           setTitle("");
+          setGithub("");
+          setLive("");
           setDescription("");
           setSummary("");
           setPhoto(null);
