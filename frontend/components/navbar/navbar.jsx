@@ -8,7 +8,7 @@ const Navbar = ({ pageRefs }) => {
   const [active, setActive] = useState("home");
   const navRef = useRef(null);
 
-  const menuItems = ["home", "about"];
+  const menuItems = ["home", "about", "projects"];
 
   useEffect(() => {
     const bodyRect = document.body.getBoundingClientRect();

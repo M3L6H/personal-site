@@ -10,10 +10,12 @@ import EditButton from './edit_button';
 import Flash from './flash';
 import Landing from './landing';
 import Navbar from './navbar';
+import Projects from './projects';
 
 const App = ({ fetchSubject }) => {
   const landingRef = useRef(null);
   const aboutRef = useRef(null);
+  const projectsRef = useRef(null);
   
   useEffect(() => {
     fetchSubject()
@@ -27,8 +29,9 @@ const App = ({ fetchSubject }) => {
         </Route>
         <Route path="/">
           <Landing ref={ landingRef } />
-          <Navbar pageRefs={ [landingRef, aboutRef] } />
+          <Navbar pageRefs={ [landingRef, aboutRef, projectsRef] } />
           <About ref={ aboutRef } />
+          <Projects ref={ projectsRef } />
           <EditButton />
         </Route>
       </Switch>
