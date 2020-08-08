@@ -12,7 +12,7 @@
 
   .projects-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax($card-width, 1fr));
     row-gap: 5rem;
     justify-items: center;
     
