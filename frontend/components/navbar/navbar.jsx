@@ -25,9 +25,9 @@ const Navbar = ({ pageRefs }) => {
 
       for (let i = pageRefs.length - 1; i >= 0; --i) {
         if (pageRefs[i].current) {
-          const refRect = i === 1 ? navRect : pageRefs[i].current.getBoundingClientRect();
+          const refRect = pageRefs[i].current.getBoundingClientRect();
 
-          if (window.scrollY >= refRect.top - bodyRect.top) {
+          if (window.scrollY >= refRect.top - bodyRect.top - (pageRefs[1].current.getBoundingClientRect().top - navRect.top)) {
             setActive(menuItems[i]);
             break;
           }
