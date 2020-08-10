@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+
+import { receiveFlash, SUCCESS } from '../../actions/flash_actions';
 
 import { Button, Form, Input } from 'semantic-ui-react';
 
 import TextareaAutosize from 'react-textarea-autosize';
 
-export default (props) => {
+const ContactForm = ({ setFlash }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   
   const handleSubmit = e => {
     e.preventDefault();
-    console.log("Submit");
+    setFlash({ message: "Email sent!", type: SUCCESS });
   };
   
   return (
@@ -59,3 +62,9 @@ export default (props) => {
     </Form>
   );
 };
+
+const mapDispatchToProps = dispatch => ({
+  setFlash: flash => dispatch(receiveFlash(flash))
+});
+
+export default connect(null, mapDispatchToProps)(ContactForm);
