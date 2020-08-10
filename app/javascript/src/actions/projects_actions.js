@@ -15,6 +15,6 @@ export const receiveProjectErorrs = (errors) => ({
 
 export const createProject = (projectData) => (dispatch) => (
   APIUtil.createProject(projectData)
-    .then((res) => dispatch(receiveProject(res)))
-    .fail(jqXHR => dispatch(receiveProjectErorrs(jqXHR.responseJSON)))
+    .then(({ data }) => dispatch(receiveProject(data)))
+    .catch(err => dispatch(receiveProjectErorrs(err.response.data)))
 );

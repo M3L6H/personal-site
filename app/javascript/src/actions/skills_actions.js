@@ -21,18 +21,18 @@ export const receiveSkillErrors = (errors) => ({
 
 export const createSkill = skill => dispatch => (
   APIUtil.createSkill(skill)
-    .then(res => dispatch(receiveSkill(res)))
-    .fail(jqXHR => dispatch(receiveSkillErrors(jqXHR.responseJSON)))
+    .then(({ data }) => dispatch(receiveSkill(data)))
+    .catch(err => dispatch(receiveSkillErrors(err.response.data)))
 );
 
 export const updateSkill = skill => dispatch => (
   APIUtil.updateSkill(skill)
-    .then(res => dispatch(receiveSkill(res)))
-    .fail(jqXHR => dispatch(receiveSkillErrors(jqXHR.responseJSON)))
+    .then(({ data }) => dispatch(receiveSkill(data)))
+    .catch(err => dispatch(receiveSkillErrors(err.response.data)))
 );
 
 export const deleteSkill = id => dispatch => (
   APIUtil.deleteSkill(id)
-    .then(res => dispatch(removeSkill(res)))
-    .fail(jqXHR => dispatch(receiveSkillErrors(jqXHR.responseJSON)))
+    .then(({ data }) => dispatch(removeSkill(data)))
+    .catch(err => dispatch(receiveSkillErrors(err.response.data)))
 );

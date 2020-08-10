@@ -21,18 +21,18 @@ const receiveUsersErrors = (errors) => ({
 
 export const fetchUser = (userId) => dispatch => (
   UsersUtil.fetchUser(userId)
-    .then(res => dispatch(receiveUser(res)))
-    .fail(jqXHR => dispatch(receiveUsersErrors(jqXHR.responseJSON)))
+    .then(({ data }) => dispatch(receiveUser(data)))
+    .catch(err => dispatch(receiveUsersErrors(err.response.data)))
 );
 
 export const deleteUser = (userId) => dispatch => (
   UsersUtil.deleteUser(userId)
-    .then(res => dispatch(removeUser(res)))
-    .fail(jqXHR => dispatch(receiveUsersErrors(jqXHR.responseJSON)))
+    .then(({ data }) => dispatch(removeUser(data)))
+    .catch(err => dispatch(receiveUsersErrors(err.response.data)))
 );
 
 export const updateUser = (userData) => dispatch => (
   UsersUtil.updateUser(userData)
-    .then(res => dispatch(receiveUser(res)))
-    .fail(jqXHR => dispatch(receiveUsersErrors(jqXHR.responseJSON)))
+    .then(({ data }) => dispatch(receiveUser(data)))
+    .catch(err => dispatch(receiveUsersErrors(err.response.data)))
 );

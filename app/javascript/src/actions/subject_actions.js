@@ -14,7 +14,7 @@ export const receiveSubject = ({ user, skills, projects }) => ({
 export const fetchSubject = () => dispatch => (
   APIUtil.fetchSubject()
     .then(res => {
-      dispatch(receiveSubject(res))
-      dispatch(fetchCommits(res.projects))
+      dispatch(receiveSubject(res.data))
+      dispatch(fetchCommits(res.data.projects))
     })
 );

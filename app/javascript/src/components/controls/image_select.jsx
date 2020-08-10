@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 import {
@@ -16,6 +16,7 @@ import withWindowDimensions from '../hocs/with_window_dimensions';
 const ImageSelect = (props) => {
   const { value, onChange, computer } = props;
 
+  const imageInputRef = useRef(null);
   const [stateValue, setStateValue] = useState(null);
   const [photoUrl, setPhotoUrl] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -69,10 +70,7 @@ const ImageSelect = (props) => {
           onClick={ e => {
             e.preventDefault();
             e.stopPropagation();
-            $(e.currentTarget)
-              .parent()
-              .parent()
-              .find(".image-input").trigger("click");
+            imageInputRef.current.dispatchEvent("click");
           } }
         >
           Change Image
@@ -92,12 +90,7 @@ const ImageSelect = (props) => {
           onClick={ e => {
             e.preventDefault();
             e.stopPropagation();
-            $(e.currentTarget)
-              .parent()
-              .parent()
-              .parent()
-              .parent()
-              .find(".image-input").trigger("click");
+            imageInputRef.current.dispatchEvent("click");
           } }
         >
           Add Image
@@ -152,7 +145,7 @@ const ImageSelect = (props) => {
 
         <input 
           { ...getInputProps({
-            className: "image-input",
+            ref: imageInputRef,
             type: "file",
             accept: "image/png, image/jpeg",
             style: { display: "none" },

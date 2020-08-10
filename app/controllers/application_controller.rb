@@ -35,6 +35,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_json
+    puts request.format
     redirect_back fallback_location: "/" if request.format.html?
   end
   

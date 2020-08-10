@@ -21,12 +21,12 @@ const receiveSessionErrors = (errors) => ({
 
 export const createSession = (user) => dispatch => (
   SessionUtil.createSession(user)
-    .then(res => dispatch(receiveSession(res)))
-    .fail(jqXHR => dispatch(receiveSessionErrors(jqXHR.responseJSON)))
+    .then(({ data }) => dispatch(receiveSession(data)))
+    .catch(err => dispatch(receiveSessionErrors(err.response.data)))
 );
 
 export const deleteSession = () => dispatch => (
   SessionUtil.deleteSession()
     .then(() => dispatch(removeSession()))
-    .fail(jqXHR => dispatch(receiveSessionErrors(jqXHR.responseJSON)))
+    .catch(err => dispatch(receiveSessionErrors(err.response.data)))
 );

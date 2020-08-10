@@ -4,6 +4,8 @@ import { withWindowDimensions } from '../hocs';
 
 import { Menu } from 'semantic-ui-react';
 
+import anime from 'animejs';
+
 const Navbar = ({ pageRefs }) => {
   const [active, setActive] = useState("home");
   const containerRef = useRef(null);
@@ -54,12 +56,15 @@ const Navbar = ({ pageRefs }) => {
                   const ref = pageRefs[idx];
                   const bodyRect = document.body.getBoundingClientRect();
                   const refRect = ref.current.getBoundingClientRect();
-                  $({ myScrollTop: window.scrollY }).animate({
-                    myScrollTop: refRect.top - bodyRect.top
-                  }, { 
+                  anime({
+                    targets: { scrollY: window.scrollY },
+                    scrollY: refRect.top - bodyRect.top,
                     duration: 800,
-                    step: val => window.scrollTo(0, val)
-                  });
+                    easing: "easeInOutQuad",
+                    update: anim => {
+                      window.scrollTo(0, anim.animations[0].currentValue);
+                    }
+                  })
                 } }
               />
             ))

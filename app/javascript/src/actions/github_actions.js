@@ -17,8 +17,8 @@ export const fetchCommits = (projects) => dispatch => {
     const owner = parts[parts.length - 2];
     ++count;
     APIUtil.fetchCommits(owner, repo)
-      .then(([res]) => { // We only care about the latest commit, thus the destructuring
-        commits[project.github] = res;
+      .then(({ data }) => { // We only care about the latest commit, thus the destructuring
+        commits[project.github] = data[0];
         --count;
 
         // Only update redux state when we have finished all our requests
