@@ -15,4 +15,6 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+import "semantic-ui-css/semantic.min.css";
+import "./application.scss"
 import "./index.jsx";
