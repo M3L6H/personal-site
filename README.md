@@ -1,6 +1,6 @@
 <h1 align="center">Personal Site</h1>
 
-<h4 align="center">The source code for <a href="michaelhollingworth.io">michaelhollingworth.io</a></h4>
+<h4 align="center">The source code for <a target="_blank" href="https://michaelhollingworth.io">michaelhollingworth.io</a></h4>
 
 - [About](#about)
 - [Technologies](#technologies)
