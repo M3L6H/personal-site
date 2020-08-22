@@ -4,4 +4,8 @@
   </script>
 <% end %>
 
+<script type="text/javascript">
+  window.siteKey = "<%= Rails.env == "development" ? Rails.application.credentials.captcha_dev[:site_key] : Rails.application.credentials.captcha_prod[:site_key] %>";
+</script>
+
 <main id="root">React broke!</main>

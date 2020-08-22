@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
+    resources :contact, only: :create
+
     # For now, we are not interested in creating new users
     resources :users, except: [:create, :new, :edit, :index]
     resources :skills, only: [:create, :update, :destroy]

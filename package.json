@@ -26,6 +26,7 @@
     "react-anime": "^3.0.3",
     "react-dom": "^16.13.1",
     "react-dropzone": "^11.0.2",
+    "react-google-recaptcha": "^2.1.0",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-textarea-autosize": "^8.2.0",
