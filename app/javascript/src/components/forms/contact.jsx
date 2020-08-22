@@ -91,7 +91,7 @@ const ContactForm = ({ setFlash }) => {
         type="submit" 
         fluid 
         positive
-        disabled={ !name || !email || !message }
+        disabled={ !name || !email || !message || !captcha }
       >
         Contact Me
       </Button>
