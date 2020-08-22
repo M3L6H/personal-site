@@ -32,7 +32,7 @@ const App = ({ fetchSubject }) => {
           <Dashboard inverted />
         </Route>
         <Route path="/">
-          <Landing ref={ landingRef } />
+          <Landing ref={ landingRef } aboutRef={ aboutRef } />
           <Navbar pageRefs={ [landingRef, aboutRef, projectsRef, contactRef] } />
           <About ref={ aboutRef } />
           <Projects ref={ projectsRef } />

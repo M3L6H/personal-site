@@ -1,0 +1,15 @@
+.scroll-button {
+  position: absolute;
+  top: 80vh;
+  left: 0;
+
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .icon {
+    cursor: pointer;
+    color: $primary;
+  }
+}

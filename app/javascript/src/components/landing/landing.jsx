@@ -5,10 +5,10 @@ import anime from 'animejs';
 
 import { Container, Header } from 'semantic-ui-react';
 
+import ScrollButton from './scroll_button';
 import Title from './title';
 
 const firstWords = ["Hi,", "my", "name", "is"];
-const nameWords = ["Michael", "Hollingworth"];
 const secondWords = ["and", "I", "am", "a"];
 
 const delay = 200;
@@ -35,13 +35,19 @@ const secondLine = {
 };
 const secondLineDelay = secondLine.delay(null, secondWords.length - 1) + pause;
 
+const scrollButton = {
+  opacity: [0, 1],
+  duration: 1500,
+  delay: secondLineDelay + 5000
+};
+
 const renderWords = (words) => (
   words.map((word, key) => (
     <span className="word" key={ key }>{ word }</span>
   ))
 );
 
-export default forwardRef((_, ref) => {
+export default forwardRef(({ aboutRef }, ref) => {
   useEffect(() => {
     anime(nameAnim);
   }, []);
@@ -105,6 +111,9 @@ export default forwardRef((_, ref) => {
           </Anime>
         </Header>
         <Title delay={ secondLineDelay } />
+        <Anime { ...scrollButton }>
+          <ScrollButton aboutRef={ aboutRef } />
+        </Anime>
       </Container>
     </section>
   );
