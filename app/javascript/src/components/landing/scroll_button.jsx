@@ -12,7 +12,7 @@ const animProps = {
     { translateY: 20 },
     { translateY: 0 }
   ],
-  delay: 2000,
+  delay: 4000,
   duration: 800,
   easing: "easeInCubic",
   loop: true
