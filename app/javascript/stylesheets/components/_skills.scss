@@ -51,8 +51,14 @@
     right: 0;
     z-index: 1;
 
-    .menu > .divider {
-      margin: 0;
+    .menu {
+      >.divider {
+        margin: 0;
+      }
+
+      .item.active {
+        color: $primary;
+      }
     }
 
     i.icon {
