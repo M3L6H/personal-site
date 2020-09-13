@@ -13,4 +13,10 @@
 #  index_posts_on_title  (title) UNIQUE
 #
 class Post < ApplicationRecord
+  validates :body, :title, presence: true
+  validates :title, uniqueness: true
+
+  # Associations
+  has_many :taggings, as: :taggable
+  has_many_attached :images
 end
