@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
     # For now, we are not interested in creating new users
     resources :users, except: [:create, :new, :edit, :index]
+    resources :posts, except: [:new, :edit]
     resources :skills, only: [:create, :update, :destroy]
     resources :taggings, only: [:create, :destroy]
     resource :session, only: [:create, :destroy]
