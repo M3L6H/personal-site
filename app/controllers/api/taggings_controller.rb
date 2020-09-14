@@ -6,7 +6,7 @@ class Api::TaggingsController < ApplicationController
   def create
     # We need to figure out what we are creating a tag for
     if tagging_params[:project_id]
-      tag = tag.find_by(name: tagging_params[:tag])
+      tag = Tag.find_by(name: tagging_params[:tag])
 
       if !tag
         tag = Tag.new(name: tagging_params[:tag])
