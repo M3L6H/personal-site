@@ -4,7 +4,7 @@ json.posts do
   else
     @posts.each do |post|
       json.set! post.id do
-        json.extract! post, :id, :title, :body
+        json.extract! post, :id, :title, :body, :created_at
       end
     end
   end
