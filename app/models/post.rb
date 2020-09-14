@@ -18,5 +18,6 @@ class Post < ApplicationRecord
 
   # Associations
   has_many :taggings, as: :taggable
+  has_many :tags, through: :taggings, source: :tag
   has_many_attached :images
 end
