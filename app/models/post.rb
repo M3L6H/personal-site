@@ -17,7 +17,7 @@ class Post < ApplicationRecord
   validates :title, uniqueness: true
 
   # Associations
-  has_many :taggings, as: :taggable
+  has_many :taggings, as: :taggable, dependent: :destroy
   has_many :tags, through: :taggings, source: :tag
   has_many_attached :images
 end
