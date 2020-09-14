@@ -32,6 +32,20 @@ class Api::PostsController < ApplicationController
     end
   end
 
+  def update
+    @post = Post.find_by(id: params[:id])
+    
+    if @post
+      if @post.update(post_params)
+        render :update
+      else
+        render json: convert_errors(@post.errors), status: 422
+      end
+    else
+      render json: { id: ["Could not find post with id #{ params[:id] }"] }, status: 404
+    end
+  end
+
 private
   def post_params
     params.require(:post).permit(:title, :body)
