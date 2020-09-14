@@ -1,5 +1,5 @@
 json.post do
-  json.extract! post, :id, :title, :body, :created_at
+  json.extract! post, :id, :title, :body, :created_at, :updated_at
 end
 
 json.taggings do
