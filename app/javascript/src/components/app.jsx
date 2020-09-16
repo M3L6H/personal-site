@@ -5,11 +5,11 @@ import { Switch, Route } from 'react-router-dom';
 import { fetchSubject } from '../actions/subject_actions';
 
 import About from './about';
+import Blog from './blog';
 import Dashboard from './dashboard';
 import EditButton from './edit_button';
 import Flash from './flash';
 import Footer from './footer';
-
 import Landing from './landing';
 import Navbar from './navbar';
 import Projects from './projects';
@@ -30,6 +30,9 @@ const App = ({ fetchSubject }) => {
       <Switch>
         <Route path="/dashboard">
           <Dashboard inverted />
+        </Route>
+        <Route path="/blog">
+          <Blog />
         </Route>
         <Route path="/">
           <Landing ref={ landingRef } aboutRef={ aboutRef } />
