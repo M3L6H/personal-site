@@ -1,5 +1,8 @@
 import React, { forwardRef, useEffect } from 'react';
 import Anime from 'react-anime';
+import { connect } from 'react-redux';
+
+import { fetchSubject } from '../../actions/subject_actions';
 
 import anime from 'animejs';
 
@@ -47,9 +50,10 @@ const renderWords = (words) => (
   ))
 );
 
-export default forwardRef(({ aboutRef }, ref) => {
+const Landing = forwardRef(({ aboutRef, fetchSubject }, ref) => {
   useEffect(() => {
     anime(nameAnim);
+    fetchSubject();
   }, []);
   
   return (
@@ -120,3 +124,9 @@ export default forwardRef(({ aboutRef }, ref) => {
     </section>
   );
 });
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchSubject: () => dispatch(fetchSubject())
+});
+
+export default connect(null, mapDispatchToProps, null, { forwardRef: true })(Landing);

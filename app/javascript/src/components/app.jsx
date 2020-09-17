@@ -1,8 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { connect } from 'react-redux';
+import React, { useRef } from 'react';
 import { Switch, Route } from 'react-router-dom';
-
-import { fetchSubject } from '../actions/subject_actions';
 
 import About from './about';
 import Blog from './blog';
@@ -15,15 +12,11 @@ import Navbar from './navbar';
 import Projects from './projects';
 import Contact from './contact';
 
-const App = ({ fetchSubject }) => {
+const App = () => {
   const landingRef = useRef(null);
   const aboutRef = useRef(null);
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
-  
-  useEffect(() => {
-    fetchSubject()
-  }, []);
   
   return (
     <>
@@ -49,8 +42,4 @@ const App = ({ fetchSubject }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchSubject: () => dispatch(fetchSubject())
-});
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;
