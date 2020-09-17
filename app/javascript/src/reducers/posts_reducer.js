@@ -9,7 +9,7 @@ export default (state={}, action) => {
 
   switch(action.type) {
     case RECEIVE_POSTS:
-      return { ...posts };
+      return { ...action.posts };
     case RECEIVE_POST:
       return { ...state, [action.post.id]: action.post };
     case REMOVE_POST:
