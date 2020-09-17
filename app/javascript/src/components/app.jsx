@@ -26,6 +26,7 @@ const App = () => {
         </Route>
         <Route path="/blog">
           <Blog />
+          <EditButton route="dashboard/create-post" />
         </Route>
         <Route path="/">
           <Landing ref={ landingRef } aboutRef={ aboutRef } />
@@ -34,7 +35,7 @@ const App = () => {
           <Projects ref={ projectsRef } />
           <Contact ref={ contactRef } />
           <Footer />
-          <EditButton />
+          <EditButton route="dashboard" />
         </Route>
       </Switch>
       <Flash />
