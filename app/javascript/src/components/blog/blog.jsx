@@ -1,9 +1,11 @@
 import React from 'react';
 
+import { Container } from 'semantic-ui-react';
+
 export default () => {
   return (
-    <section className="blog">
+    <Container text className="blog">
 
-    </section>
+    </Container>
   );
 };
