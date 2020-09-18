@@ -4,6 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  body       :text             not null
+#  published  :boolean          default(FALSE), not null
 #  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -15,6 +16,7 @@
 class Post < ApplicationRecord
   validates :body, :title, presence: true
   validates :title, uniqueness: true
+  validates :published, inclusion: { in: [true, false] }
 
   # Associations
   has_many :taggings, as: :taggable, dependent: :destroy
