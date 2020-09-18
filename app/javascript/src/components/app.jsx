@@ -9,6 +9,7 @@ import Flash from './flash';
 import Footer from './footer';
 import Landing from './landing';
 import Navbar from './navbar';
+import PostEditor from './post_editor';
 import Projects from './projects';
 import Contact from './contact';
 
@@ -21,6 +22,9 @@ const App = () => {
   return (
     <>
       <Switch>
+        <Route path="/dashboard/create-post">
+          <PostEditor />
+        </Route>
         <Route path="/dashboard">
           <Dashboard inverted />
         </Route>
