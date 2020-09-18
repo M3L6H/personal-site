@@ -3,7 +3,8 @@ import React, { useMemo, useState } from 'react';
 import { 
   Container, 
   Header, 
-  Input 
+  Input,
+  Segment
 } from 'semantic-ui-react';
 
 import { createEditor } from 'slate';
@@ -29,13 +30,15 @@ const PostEditor = () => {
         value={ title }
         onChange={ (_, { value }) => setTitle(value) }
       />
-      <Slate
-        editor={ editor }
-        value={ value }
-        onChange={ setValue }
-      >
-        <Editable />
-      </Slate>
+      <Segment className="document-editor">
+        <Slate
+          editor={ editor }
+          value={ value }
+          onChange={ setValue }
+        >
+          <Editable />
+        </Slate>
+      </Segment>
     </Container>
   );
 };
