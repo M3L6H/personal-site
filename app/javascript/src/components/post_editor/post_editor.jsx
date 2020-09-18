@@ -27,7 +27,7 @@ const PostEditor = () => {
         placeholder="Title"
         fluid
         value={ title }
-        onChange={ (e) => setTitle(e.value) }
+        onChange={ (_, { value }) => setTitle(value) }
       />
       <Slate
         editor={ editor }
