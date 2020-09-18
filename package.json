@@ -35,6 +35,8 @@
     "redux-thunk": "^2.3.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^1.0.0",
+    "slate": "^0.58.4",
+    "slate-react": "^0.58.4",
     "svg-url-loader": "^6.0.0",
     "webpack": "^4.44.0",
     "webpack-cli": "^3.3.12"
