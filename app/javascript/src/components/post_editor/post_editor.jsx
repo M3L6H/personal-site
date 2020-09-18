@@ -21,7 +21,7 @@ const PostEditor = () => {
   ]);
 
   return (
-    <Container>
+    <Container text className="post-editor">
       <Header as="h1">Create Post</Header>
       <Input
         placeholder="Title"
