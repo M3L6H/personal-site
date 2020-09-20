@@ -1,1 +1,1 @@
-export { default } from './post_editor';
+export { default } from './post_editor_container';
