@@ -1,4 +1,5 @@
 import React, { useMemo, useRef, useState } from 'react';
+import { withAuth } from '../hocs';
 
 import { 
   Container, 
@@ -89,4 +90,4 @@ const PostEditor = () => {
   );
 };
 
-export default PostEditor;
+export default withAuth(PostEditor, { requireAdmin: true });
