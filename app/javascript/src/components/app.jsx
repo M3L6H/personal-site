@@ -28,10 +28,6 @@ const App = () => {
         <Route path="/dashboard">
           <Dashboard inverted />
         </Route>
-        <Route path="/blog">
-          <Blog />
-          <EditButton route="dashboard/create-post" />
-        </Route>
         <Route path="/">
           <Landing ref={ landingRef } aboutRef={ aboutRef } />
           <Navbar pageRefs={ [landingRef, aboutRef, projectsRef, contactRef] } />
