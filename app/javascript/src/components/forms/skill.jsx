@@ -89,7 +89,10 @@ const SkillForm = ({ skills, createSkill, updateSkill, deleteSkill, errors }) =>
             <Icon 
               name="delete"
               link
-              onClick={ () => deleteSkill(skill.id) }
+              onClick={ (e) => {
+                e.stopPropagation();
+                deleteSkill(skill.id);
+              } }
             />
           </Label>
         )) }
