@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { withAuth, withMenu } from '../hocs';
 
 import { Container } from 'semantic-ui-react';
@@ -6,7 +6,11 @@ import { Container } from 'semantic-ui-react';
 import Navbar from './navbar';
 import { BioForm, ProfilePhotoForm, ProjectForm, SkillForm } from '../forms';
 
-const Dashboard = () => {
+const Dashboard = ({ fetchSubject }) => {
+  useEffect(() => {
+    fetchSubject();
+  }, []);
+
   return (
     <Container text>
       <ProfilePhotoForm />
