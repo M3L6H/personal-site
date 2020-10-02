@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :contact, only: :create
 
     # For now, we are not interested in creating new users
-    resources :users, except: [:new, :edit, :index]
+    resources :users, except: [:create, :new, :edit, :index]
     resources :posts, except: [:new, :edit]
     resources :skills, only: [:create, :update, :destroy]
     resources :taggings, only: [:create, :destroy]
