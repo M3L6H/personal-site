@@ -12,7 +12,7 @@
 ## About
 
 My personal site is built on a Rails-React-Redux stack using webpacker. It is
-hosted on AWS via Elastic Beanstalk and uses S3 for storage. It is a single-page
+hosted on Heroku and uses S3 for storage. It is a single-page
 scrolling site containing advanced features like a sticky navbar, responsive
 layout for desktop and mobile, animated filters, and more.
 
