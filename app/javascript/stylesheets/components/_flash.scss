@@ -6,6 +6,7 @@
   max-width: $flash-width;
   transform: translateY(100px);
   transition: transform 1s;
+  z-index: 10;
 
   &.visible {
     transform: translateY(0);
