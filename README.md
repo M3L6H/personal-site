@@ -53,7 +53,7 @@ animation with React Anime was lacking, so I resorted to using vanilla anime.js.
   <img alt="Image of skills animation" src="/images/Skills.gif">
 </p>
 
-While filter the skills by type did not prove to be a particularly challenging
+While filtering the skills by type did not prove to be a particularly challenging
 task, figuring out how to animate them smoothly proved to be quite difficult.
 The final result involved using some carefully crafted SCSS to shrink the skills
 to a width and height of 0, while also using flexbox to keep the skills aligned
@@ -135,7 +135,7 @@ export default props => {
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
   const w = window.innerWidth;
-  
+
   // mobile, tablet, and computer are mutually exclusive
   const [mobile, setMobile] = useState(w <= MOBILE);
   const [tablet, setTablet] = useState(w > MOBILE && w <= TABLET);
@@ -168,7 +168,7 @@ export default props => {
     document.documentElement.style.setProperty("--vh", `${ vh }px`);
     document.documentElement.style.setProperty("--vw", `${ vw }px`);
   });
-  
+
   useEffect(() => {
     window.addEventListener("resize", updateWindowDimensions);
 
