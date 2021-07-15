@@ -8,6 +8,7 @@ import anime from "animejs";
 
 import { Container, Header } from "semantic-ui-react";
 
+import Particles from "../particles";
 import ScrollButton from "./scroll_button";
 import Title from "./title";
 
@@ -58,6 +59,7 @@ const Landing = forwardRef(({ aboutRef, fetchSubject }, ref) => {
   
   return (
     <section className="landing" ref={ ref }>
+      <Particles />
       <Container text>
         <Header as="h2">
           <Anime { ...firstLine }>

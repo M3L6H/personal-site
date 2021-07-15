@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { WindowContext } from "../providers/window_dimensions";
 
-const WithWindowDimensions = (Component) => {
+const withWindowDimensions = (Component) => {
   const WithWindowDimensionsWrapper = props => {
     const window = useContext(WindowContext);
     
@@ -18,6 +18,5 @@ const WithWindowDimensions = (Component) => {
   return WithWindowDimensionsWrapper;
 };
 
-WithWindowDimensions.displayName = "WithWindowDimensions";
 
-export default WithWindowDimensions;
+export default withWindowDimensions;

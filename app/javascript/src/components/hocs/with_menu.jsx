@@ -2,7 +2,7 @@ import React from "react";
 
 import { Segment } from "semantic-ui-react";
 
-const WithMenu = (Component, Menu) => {
+const withMenu = (Component, Menu) => {
   const WithMenuWrapper = (props) => {
     return (
       <>
@@ -19,6 +19,4 @@ const WithMenu = (Component, Menu) => {
   return WithMenuWrapper;
 };
 
-WithMenu.displayName = "WithMenu";
-
-export default WithMenu;
+export default withMenu;
