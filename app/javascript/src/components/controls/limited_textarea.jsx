@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import TextareaAutosize from 'react-textarea-autosize';
-import { Label } from 'semantic-ui-react';
+import TextareaAutosize from "react-textarea-autosize";
+import { Label } from "semantic-ui-react";
 
 const LimitedTextarea = (props) => {
   const { limit, value, onChange } = props;

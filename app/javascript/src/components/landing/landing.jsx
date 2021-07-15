@@ -1,15 +1,15 @@
-import React, { forwardRef, useEffect } from 'react';
-import Anime from 'react-anime';
-import { connect } from 'react-redux';
+import React, { forwardRef, useEffect } from "react";
+import Anime from "react-anime";
+import { connect } from "react-redux";
 
-import { fetchSubject } from '../../actions/subject_actions';
+import { fetchSubject } from "../../actions/subject_actions";
 
-import anime from 'animejs';
+import anime from "animejs";
 
-import { Container, Header } from 'semantic-ui-react';
+import { Container, Header } from "semantic-ui-react";
 
-import ScrollButton from './scroll_button';
-import Title from './title';
+import ScrollButton from "./scroll_button";
+import Title from "./title";
 
 const firstWords = ["Hi,", "my", "name", "is"];
 const secondWords = ["and", "I", "am", "a"];
@@ -25,10 +25,10 @@ const firstLine = {
 const firstLineDelay = firstLine.delay(null, firstWords.length - 1);
 
 const nameAnim = {
-  targets: '#name path',
+  targets: "#name path",
   strokeDashoffset: [anime.setDashoffset, 0],
-  easing: 'easeInOutSine',
-  delay: (_, i) => i * 50 + firstLineDelay,
+  easing: "easeInOutSine",
+  delay: (_, i) => i * 50 + firstLineDelay
 };
 const nameDelay = nameAnim.delay(null, 37) + 3 * pause;
 
@@ -65,7 +65,7 @@ const Landing = forwardRef(({ aboutRef, fetchSubject }, ref) => {
           </Anime>
         </Header>
         <Anime opacity={ [0, 1] }>
-          <Header as="h2" className="primary" className="name-header">
+          <Header as="h2" className="primary name-header">
             <svg width="1496" height="151" viewBox="0 0 1496 151" fill="none" xmlns="http://www.w3.org/2000/svg" id="name" className="name-svg">
               <mask id="path-1-outside-1" maskUnits="userSpaceOnUse" x="0.960007" y="0.279999" width="1495" height="151" fill="black">
                 <rect fill="white" x="0.960007" y="0.279999" width="1495" height="151"/>
@@ -128,5 +128,7 @@ const Landing = forwardRef(({ aboutRef, fetchSubject }, ref) => {
 const mapDispatchToProps = (dispatch) => ({
   fetchSubject: () => dispatch(fetchSubject())
 });
+
+Landing.displayName = "Landing";
 
 export default connect(null, mapDispatchToProps, null, { forwardRef: true })(Landing);

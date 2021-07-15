@@ -5,6 +5,9 @@
   "description": "",
   "main": "./index.js",
   "keywords": [],
+  "scripts": {
+    "lint": "eslint './app/javascript/**/*.{js,jsx}'"
+  },
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -42,7 +45,11 @@
     "webpack-cli": "^3.3.12"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.14.7",
     "circular-dependency-plugin": "^5.2.0",
+    "eslint": "^7.30.0",
+    "eslint-plugin-react": "^7.24.0",
+    "pre-commit": "^1.2.2",
     "webpack-dev-server": "^3.11.0"
   },
   "engines": {

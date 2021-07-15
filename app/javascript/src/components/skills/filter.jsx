@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import { CATEGORIES, COLORS } from '../../util/constants'
-import capitalize from '../../util/capitalize';
+import { CATEGORIES, COLORS } from "../../util/constants";
+import capitalize from "../../util/capitalize";
 
-import { Dropdown } from 'semantic-ui-react';
+import { Dropdown } from "semantic-ui-react";
 
-export default ({ active, setActive }) => {
+const Filter = ({ active, setActive }) => {
   return (
     <Dropdown
       icon="filter"
@@ -33,3 +33,7 @@ export default ({ active, setActive }) => {
     </Dropdown>
   );
 };
+
+Filter.displayName = "Filter";
+
+export default Filter;

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from "react";
+import { connect } from "react-redux";
 
 import {
   Button,
@@ -9,9 +9,9 @@ import {
   Message,
   Modal,
   Segment
-} from 'semantic-ui-react';
+} from "semantic-ui-react";
 
-import { createSession } from '../../actions/session_actions';
+import { createSession } from "../../actions/session_actions";
 
 const Auth = ({ type, open, setOpen, signIn, signUp, message, obstruct }) => {
   const [username, setUsername] = useState("");

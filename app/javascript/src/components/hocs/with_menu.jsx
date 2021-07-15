@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import { Segment } from 'semantic-ui-react';
+import { Segment } from "semantic-ui-react";
 
-export default (Component, Menu) => {
-  return (props) => {
+const WithMenu = (Component, Menu) => {
+  const WithMenuWrapper = (props) => {
     return (
       <>
         <Menu attached="top" />
@@ -13,4 +13,12 @@ export default (Component, Menu) => {
       </>
     );
   };
+
+  WithMenuWrapper.displayName = "WithMenuWrapper";
+  
+  return WithMenuWrapper;
 };
+
+WithMenu.displayName = "WithMenu";
+
+export default WithMenu;

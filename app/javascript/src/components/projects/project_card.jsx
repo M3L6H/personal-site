@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { Card, Header, Icon } from 'semantic-ui-react'
+import { Card, Header, Icon } from "semantic-ui-react";
 
-import truncate from '../../util/truncate';
+import truncate from "../../util/truncate";
 
 const dtf = new Intl.DateTimeFormat("en", { 
   year: "numeric", 
@@ -10,7 +10,7 @@ const dtf = new Intl.DateTimeFormat("en", {
   day: "2-digit"
 });
 
-export default ({ title, summary, description, github, live, photo, date }) => {
+const ProjectCard = ({ title, summary, description, github, live, photo, date }) => {
   const [flipped, setFlipped] = useState(false);
   let meta = "Loading...";
 
@@ -21,13 +21,13 @@ export default ({ title, summary, description, github, live, photo, date }) => {
   }
 
   const extra = (<>
-    <a href={ github } onClick={ e => e.stopPropagation() } target="_blank">
+    <a href={ github } onClick={ e => e.stopPropagation() } target="_blank" rel="noreferrer">
       <Icon name="github" />
       Github
     </a>
 
     { live &&
-      <a href={ live } onClick={ e => e.stopPropagation() } target="_blank">
+      <a href={ live } onClick={ e => e.stopPropagation() } target="_blank" rel="noreferrer">
         <Icon name="external" />
         Live
       </a>
@@ -64,3 +64,7 @@ export default ({ title, summary, description, github, live, photo, date }) => {
     </div>
   );
 };
+
+ProjectCard.displayName = "ProjectCard";
+
+export default ProjectCard;

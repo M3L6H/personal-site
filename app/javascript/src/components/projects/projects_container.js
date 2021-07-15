@@ -1,6 +1,6 @@
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import Projects from './projects';
+import Projects from "./projects";
 
 const mapStateToProps = (state) => ({
   projects: Object.values(state.entities.projects || {}),

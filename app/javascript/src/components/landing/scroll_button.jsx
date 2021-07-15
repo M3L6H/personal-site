@@ -1,9 +1,9 @@
-import React from 'react';
-import Anime from 'react-anime';
+import React from "react";
+import Anime from "react-anime";
 
-import { Icon } from 'semantic-ui-react';
+import { Icon } from "semantic-ui-react";
 
-import anime from 'animejs';
+import anime from "animejs";
 
 const animProps = {
   keyframes: [
@@ -18,7 +18,7 @@ const animProps = {
   loop: true
 };
 
-export default ({ aboutRef }) => {
+const ScrollButton = ({ aboutRef }) => {
   return (
     <div className="scroll-button">
       <Anime { ...animProps } >
@@ -36,10 +36,14 @@ export default ({ aboutRef }) => {
               update: anim => {
                 window.scrollTo(0, anim.animations[0].currentValue);
               }
-            })
+            });
           } }
         />
       </Anime>
     </div>
   );
 };
+
+ScrollButton.displayName = "ScrollButton";
+
+export default ScrollButton;

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import { Input, Label } from 'semantic-ui-react';
+import { Input, Label } from "semantic-ui-react";
 
 const LimitedInput = (props) => {
   const { limit, value, onChange } = props;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 import { 
   MOBILE, 
@@ -6,8 +6,8 @@ import {
   COMPUTER, 
   LARGE_SCREEN, 
   WIDE_SCREEN 
-} from '../../util/constants';
-import debounce from '../../util/debouncer';
+} from "../../util/constants";
+import debounce from "../../util/debouncer";
 
 const w = window.innerWidth;
 
@@ -22,7 +22,7 @@ export const WindowContext = React.createContext({
   ultraWideScreen: w > WIDE_SCREEN
 });
 
-export default props => {
+const WindowDimensions = props => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
@@ -82,3 +82,7 @@ export default props => {
 
   return <WindowContext.Provider { ...props } value={ value } />;
 };
+
+WindowDimensions.displayName = "WindowDimensions";
+
+export default WindowDimensions;

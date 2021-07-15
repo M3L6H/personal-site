@@ -1,5 +1,5 @@
-import { RECEIVE_PROJECT } from '../actions/projects_actions';
-import { RECEIVE_SUBJECT } from '../actions/subject_actions';
+import { RECEIVE_PROJECT } from "../actions/projects_actions";
+import { RECEIVE_SUBJECT } from "../actions/subject_actions";
 
 export default (state={}, { type, project, projects }) => {
   Object.freeze(state);

@@ -1,10 +1,10 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef } from "react";
 
-import { Card, Container, Header } from 'semantic-ui-react';
+import { Card, Container, Header } from "semantic-ui-react";
 
-import ProjectCard from './project_card';
+import ProjectCard from "./project_card";
 
-export default forwardRef(({ projects, commits }, ref) => {
+const Projects = forwardRef(({ projects, commits }, ref) => {
   const mappedProjects = projects.map(project => ({
     ...project,
     date: commits[project.github] ? new Date(commits[project.github].commit.author.date) : null
@@ -31,3 +31,7 @@ export default forwardRef(({ projects, commits }, ref) => {
     </section>
   );
 });
+
+Projects.displayName = "Projects";
+
+export default Projects;
