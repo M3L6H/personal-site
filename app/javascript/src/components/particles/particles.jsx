@@ -5,8 +5,11 @@ const VERTEX_SHADER = `
 precision mediump float;
 
 attribute vec2 vertPosition;
+attribute vec3 vertColor;
+varying vec3 fragColor;
 
 void main() {
+  fragColor = vertColor;
   gl_Position = vec4(vertPosition, 0.0, 1.0);
 }
 `;
@@ -14,8 +17,10 @@ void main() {
 const FRAGMENT_SHADER = `
 precision mediump float;
 
+varying vec3 fragColor;
+
 void main() {
-  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+  gl_FragColor = vec4(fragColor, 1.0);
 }
 `;
 
@@ -80,10 +85,10 @@ const Particles = ({ windowHeight, windowWidth }) => {
     }
 
     const triangleVertices = [
-      // X, Y
-      0.0, 0.5,
-      -0.5, -0.5,
-      0.5, -0.5
+      // X, Y     R,   G,   B
+      0.0, 0.5,   1.0, 1.0, 0.0,
+      -0.5, -0.5, 0.0, 1.0, 1.0,
+      0.5, -0.5,  1.0, 0.0, 1.0
     ];
 
     // Create buffer on GPU
@@ -92,20 +97,34 @@ const Particles = ({ windowHeight, windowWidth }) => {
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(triangleVertices), gl.STATIC_DRAW);
 
     const positionAttribLocation = gl.getAttribLocation(program, "vertPosition");
+    const colorAttribLocation = gl.getAttribLocation(program, "vertColor");
     gl.vertexAttribPointer(
       positionAttribLocation, // Attribute location
       2, // Number of values in each attribute
       gl.FLOAT, // Type of the values
       gl.FALSE, // Is the data normalized?
-      2 * Float32Array.BYTES_PER_ELEMENT, // Size of a vertex
+      5 * Float32Array.BYTES_PER_ELEMENT, // Size of a vertex
       0 // Offset from the beginning of a single vertex to this attribute
     );
 
+    gl.vertexAttribPointer(
+      colorAttribLocation, // Attribute location
+      3, // Number of values in each attribute
+      gl.FLOAT, // Type of the values
+      gl.FALSE, // Is the data normalized?
+      5 * Float32Array.BYTES_PER_ELEMENT, // Size of a vertex
+      2 * Float32Array.BYTES_PER_ELEMENT // Offset from the beginning of a single vertex to this attribute
+    );
+
     gl.enableVertexAttribArray(positionAttribLocation);
+    gl.enableVertexAttribArray(colorAttribLocation);
 
     // Main rendering
     gl.useProgram(program);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
+    // gl.drawArrays(gl.LINES, 0, 3);
+    // gl.drawArrays(gl.LINE_STRIP, 0, 3);
+    // gl.drawArrays(gl.LINE_LOOP, 0, 3);
 
   }, [window]);
   
