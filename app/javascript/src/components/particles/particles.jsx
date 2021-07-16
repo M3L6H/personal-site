@@ -38,22 +38,24 @@ const circleShaders = (gl, numVerts) => {
 
   attribute float vertexId;
   uniform float numVerts;
-  uniform vec2 resolution;
+  uniform float time;
 
   #define PI radians(180.0)
 
+  float hash(float p) {
+    vec2 p2 = fract(vec2(p * 5.3983, p * 5.4427));
+    p2 += dot(p2.yx, p2.xy + vec2(21.5351, 14.3137));
+    return fract(p2.x * p2.y * 95.4337);
+  }
+
   void main() {
     float u = vertexId / numVerts;
-    float angle = u * PI * 2.0;
-    float radius = 0.8;
+    float off = floor(time + u) / 1000.0;
+    float x = hash(u + off) * 2.0 - 1.0;
+    float y = fract(time + u) * -2.0 + 1.0;
 
-    vec2 pos = vec2(cos(angle), sin(angle)) * radius;
-
-    float aspect = resolution.y / resolution.x;
-    vec2 scale = vec2(aspect, 1);
-
-    gl_Position = vec4(pos * scale, 0, 1);
-    gl_PointSize = 5.0;
+    gl_Position = vec4(x, y, 0, 1);
+    gl_PointSize = 2.0;
   }
   `;
 
@@ -61,7 +63,7 @@ const circleShaders = (gl, numVerts) => {
   precision mediump float;
 
   void main() {
-    gl_FragColor = vec4(1, 0, 0, 1);
+    gl_FragColor = vec4(0, 0, 1, 1);
   }
   `;
 
@@ -90,15 +92,40 @@ const circleShaders = (gl, numVerts) => {
   };
 };
 
+let rAF;
+
+const render = (gl, numVerts, program, idBuffer, time) => {
+  time *= 0.001;
+
+  gl.useProgram(program);
+
+  const vertexIdLoc = gl.getAttribLocation(program, "vertexId");
+  const numVertsLoc = gl.getUniformLocation(program, "numVerts");
+  const timeLoc = gl.getUniformLocation(program, "time");
+
+  gl.enableVertexAttribArray(vertexIdLoc);
+
+  gl.bindBuffer(gl.ARRAY_BUFFER, idBuffer);
+
+  gl.vertexAttribPointer(vertexIdLoc, 1, gl.FLOAT, false, 0, 0);
+  gl.uniform1f(numVertsLoc, numVerts);
+  gl.uniform1f(timeLoc, time);
+
+  // Main rendering
+  gl.drawArrays(gl.POINTS, 0, numVerts);
+  
+  rAF = requestAnimationFrame(t => render(gl, numVerts, program, idBuffer, t));
+};
+
 const Particles = ({ windowHeight, windowWidth }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
     const gl = initializeWebGL(canvasRef, windowWidth, windowHeight);
 
-    if (!gl) return;
+    if (!gl) return () => cancelAnimationFrame(rAF);
 
-    const numVerts = 20;
+    const numVerts = 400;
     const { idBuffer, vs, fs } = circleShaders(gl, numVerts);
 
     // Initialize program
@@ -109,41 +136,23 @@ const Particles = ({ windowHeight, windowWidth }) => {
 
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
       console.error("Error linking program", gl.getProgramInfoLog(program));
-      return;
+      return () => cancelAnimationFrame(rAF);
     }
 
     if (process.env.NODE_ENV !== "production") {
       gl.validateProgram(program);
       if (!gl.getProgramParameter(program, gl.VALIDATE_STATUS)) {
         console.error("Error validating program", gl.getProgramInfoLog(program));
-        return;
+        return () => cancelAnimationFrame(rAF);
       }
     }
 
-    gl.useProgram(program);
+    if (rAF) cancelAnimationFrame(rAF);
 
-    const vertexIdLoc = gl.getAttribLocation(program, "vertexId");
-    const numVertsLoc = gl.getUniformLocation(program, "numVerts");
-    const resolutionLoc = gl.getUniformLocation(program, "resolution");
+    rAF = requestAnimationFrame(time => render(gl, numVerts, program, idBuffer, time));
 
-    gl.enableVertexAttribArray(vertexIdLoc);
-
-    gl.bindBuffer(gl.ARRAY_BUFFER, idBuffer);
-
-    gl.vertexAttribPointer(vertexIdLoc, 1, gl.FLOAT, false, 0, 0);
-
-    gl.uniform1f(numVertsLoc, numVerts);
-
-    gl.uniform2f(resolutionLoc, gl.canvas.width, gl.canvas.height);
-
-    // Main rendering
-    gl.drawArrays(gl.POINTS, 0, numVerts);
-    // gl.drawArrays(gl.TRIANGLES, 0, 3);
-    // gl.drawArrays(gl.LINES, 0, 3);
-    // gl.drawArrays(gl.LINE_STRIP, 0, 3);
-    // gl.drawArrays(gl.LINE_LOOP, 0, 3);
-
-  }, [window]);
+    return () => cancelAnimationFrame(rAF);
+  }, [windowHeight, windowWidth]);
   
   return (
     <canvas ref={ canvasRef } id="particles-canvas"></canvas>
