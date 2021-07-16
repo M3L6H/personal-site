@@ -6,7 +6,7 @@ const randFloat = (range=2) => Math.random() * range - (range / 2.0);
 const numPoints = 100;
 const data = []; // x, y, xVel, yVel
 
-for (let i = 0; i < numPoints * 4; ++i) data.push(randFloat());
+for (let i = 0; i < numPoints * 4; ++i) data.push(randFloat() / (Math.floor((i % 4) / 2) * 20 + 1));
 
 const initializeWebGL = (canvasRef, windowWidth, windowHeight) => {
   if (!canvasRef.current) return null;
@@ -154,7 +154,7 @@ const compileShaders = gl => {
   precision mediump float;
 
   void main() {
-    gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
+    gl_FragColor = vec4(0.871,0.431,0.294, 1.0);
   }
   `;
 
@@ -168,6 +168,7 @@ let rAF;
 
 const render = (time, webgl) => {
   time *= 0.001;
+  time %= 1000;
   const { gl, program, posLoc, velLoc } = webgl;
   gl.vertexAttribPointer(
     posLoc,
