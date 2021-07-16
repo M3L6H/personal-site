@@ -1,74 +1,110 @@
 import React, { useEffect, useRef } from "react";
 import { withWindowDimensions } from "../hocs";
 
-const VERTEX_SHADER = `
-precision mediump float;
+const initializeWebGL = (canvasRef, windowWidth, windowHeight) => {
+  if (!canvasRef.current) return null;
 
-attribute vec2 vertPosition;
-attribute vec3 vertColor;
-varying vec3 fragColor;
+  let gl = canvasRef.current.getContext("webgl");
 
-void main() {
-  fragColor = vertColor;
-  gl_Position = vec4(vertPosition, 0.0, 1.0);
-}
-`;
+  if (!gl) {
+    console.warn("Your browser does not support webgl natively. Falling back on experimental-webgl");
+    gl = canvasRef.current.getContext("experimental-webgl");
+  }
 
-const FRAGMENT_SHADER = `
-precision mediump float;
+  if (!gl) {
+    console.error("Your browser does not support webgl");
+    return null;
+  }
+  
+  gl.canvas.width = windowWidth;
+  gl.canvas.height = windowHeight;
+  gl.viewport(0, 0, windowWidth, windowHeight);
+  gl.clearColor(0.75, 0.85, 0.8, 1.0);
+  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-varying vec3 fragColor;
+  return gl;
+};
 
-void main() {
-  gl_FragColor = vec4(fragColor, 1.0);
-}
-`;
+const circleShaders = (gl, numVerts) => {
+  const vertexIds = new Float32Array(numVerts);
+  vertexIds.forEach((_, i) => { vertexIds[i] = i; });
+
+  const idBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, idBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, vertexIds, gl.STATIC_DRAW);
+
+  const CIRCLE_VERTEX_SHADER = `
+  precision mediump float;
+
+  attribute float vertexId;
+  uniform float numVerts;
+  uniform vec2 resolution;
+
+  #define PI radians(180.0)
+
+  void main() {
+    float u = vertexId / numVerts;
+    float angle = u * PI * 2.0;
+    float radius = 0.8;
+
+    vec2 pos = vec2(cos(angle), sin(angle)) * radius;
+
+    float aspect = resolution.y / resolution.x;
+    vec2 scale = vec2(aspect, 1);
+
+    gl_Position = vec4(pos * scale, 0, 1);
+    gl_PointSize = 5.0;
+  }
+  `;
+
+  const CIRCLE_FRAGMENT_SHADER = `
+  precision mediump float;
+
+  void main() {
+    gl_FragColor = vec4(1, 0, 0, 1);
+  }
+  `;
+
+  const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+  const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+
+  gl.shaderSource(vertexShader, CIRCLE_VERTEX_SHADER);
+  gl.shaderSource(fragmentShader, CIRCLE_FRAGMENT_SHADER);
+
+  gl.compileShader(vertexShader);
+  if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {
+    console.error("Error compiling circle vertex shader", gl.getShaderInfoLog(vertexShader));
+    return null;
+  }
+  
+  gl.compileShader(fragmentShader);
+  if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
+    console.error("Error compiling circle fragment shader", gl.getShaderInfoLog(fragmentShader));
+    return null;
+  }
+
+  return {
+    idBuffer,
+    vs: vertexShader,
+    fs: fragmentShader
+  };
+};
 
 const Particles = ({ windowHeight, windowWidth }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    if (!canvasRef.current) return;
+    const gl = initializeWebGL(canvasRef, windowWidth, windowHeight);
 
-    let gl = canvasRef.current.getContext("webgl");
+    if (!gl) return;
 
-    if (!gl) {
-      console.warn("Your browser does not support webgl natively. Falling back on experimental-webgl");
-      gl = canvasRef.current.getContext("experimental-webgl");
-    }
+    const numVerts = 20;
+    const { idBuffer, vs, fs } = circleShaders(gl, numVerts);
 
-    if (!gl) {
-      console.error("Your browser does not support webgl");
-      return;
-    }
-    
-    gl.canvas.width = windowWidth;
-    gl.canvas.height = windowHeight;
-    gl.viewport(0, 0, windowWidth, windowHeight);
-    gl.clearColor(0.75, 0.85, 0.8, 1.0);
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
-    const vertexShader = gl.createShader(gl.VERTEX_SHADER);
-    const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
-
-    gl.shaderSource(vertexShader, VERTEX_SHADER);
-    gl.shaderSource(fragmentShader, FRAGMENT_SHADER);
-
-    gl.compileShader(vertexShader);
-    if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {
-      console.error("Error compiling vertex shader", gl.getShaderInfoLog(vertexShader));
-      return;
-    }
-    
-    gl.compileShader(fragmentShader);
-    if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
-      console.error("Error compiling fragment shader", gl.getShaderInfoLog(fragmentShader));
-      return;
-    }
-
+    // Initialize program
     const program = gl.createProgram();
-    gl.attachShader(program, vertexShader);
-    gl.attachShader(program, fragmentShader);
+    gl.attachShader(program, vs);
+    gl.attachShader(program, fs);
     gl.linkProgram(program);
 
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
@@ -84,44 +120,25 @@ const Particles = ({ windowHeight, windowWidth }) => {
       }
     }
 
-    const triangleVertices = [
-      // X, Y     R,   G,   B
-      0.0, 0.5,   1.0, 1.0, 0.0,
-      -0.5, -0.5, 0.0, 1.0, 1.0,
-      0.5, -0.5,  1.0, 0.0, 1.0
-    ];
+    gl.useProgram(program);
 
-    // Create buffer on GPU
-    const triangleBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, triangleBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(triangleVertices), gl.STATIC_DRAW);
+    const vertexIdLoc = gl.getAttribLocation(program, "vertexId");
+    const numVertsLoc = gl.getUniformLocation(program, "numVerts");
+    const resolutionLoc = gl.getUniformLocation(program, "resolution");
 
-    const positionAttribLocation = gl.getAttribLocation(program, "vertPosition");
-    const colorAttribLocation = gl.getAttribLocation(program, "vertColor");
-    gl.vertexAttribPointer(
-      positionAttribLocation, // Attribute location
-      2, // Number of values in each attribute
-      gl.FLOAT, // Type of the values
-      gl.FALSE, // Is the data normalized?
-      5 * Float32Array.BYTES_PER_ELEMENT, // Size of a vertex
-      0 // Offset from the beginning of a single vertex to this attribute
-    );
+    gl.enableVertexAttribArray(vertexIdLoc);
 
-    gl.vertexAttribPointer(
-      colorAttribLocation, // Attribute location
-      3, // Number of values in each attribute
-      gl.FLOAT, // Type of the values
-      gl.FALSE, // Is the data normalized?
-      5 * Float32Array.BYTES_PER_ELEMENT, // Size of a vertex
-      2 * Float32Array.BYTES_PER_ELEMENT // Offset from the beginning of a single vertex to this attribute
-    );
+    gl.bindBuffer(gl.ARRAY_BUFFER, idBuffer);
 
-    gl.enableVertexAttribArray(positionAttribLocation);
-    gl.enableVertexAttribArray(colorAttribLocation);
+    gl.vertexAttribPointer(vertexIdLoc, 1, gl.FLOAT, false, 0, 0);
+
+    gl.uniform1f(numVertsLoc, numVerts);
+
+    gl.uniform2f(resolutionLoc, gl.canvas.width, gl.canvas.height);
 
     // Main rendering
-    gl.useProgram(program);
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    gl.drawArrays(gl.POINTS, 0, numVerts);
+    // gl.drawArrays(gl.TRIANGLES, 0, 3);
     // gl.drawArrays(gl.LINES, 0, 3);
     // gl.drawArrays(gl.LINE_STRIP, 0, 3);
     // gl.drawArrays(gl.LINE_LOOP, 0, 3);
