@@ -3,25 +3,32 @@ import { withWindowDimensions } from "../hocs";
 
 const randFloat = (range=2) => Math.random() * range - (range / 2.0);
 
-const NUM_POINTS = 1000;
+const NUM_POINTS = 100;
 const RADIUS = 0.005;
 const RESOLUTION = 8;
 const POINTS_PER_TRI = 3;
 const SLOWNESS = 21;
-const DATA_COUNT = 5;
-let data = []; // x, y, xVel, yVel, idx
-let pos;
-let vel;
+const DATA_COUNT = 1;
 
+// Contains an index for each point used to construct a particle
+let data = []; // idx
+// Contains the starting positions of each particle
+let pPos = []; // x, y
+// Contains the starting velocities of each particle
+let pVel = []; // xVel yVel
 
 for (let i = 0; i < NUM_POINTS * RESOLUTION * POINTS_PER_TRI; ++i) {
   if (i % (RESOLUTION * POINTS_PER_TRI) === 0) {
-    pos = [randFloat(), randFloat()];
-    vel = [randFloat() / SLOWNESS, randFloat() / SLOWNESS];
+    pPos = pPos.concat([randFloat(), randFloat()]);
+    pVel = pVel.concat([randFloat() / SLOWNESS, randFloat() / SLOWNESS]);
   }
 
-  data = data.concat([...pos, ...vel, i % (RESOLUTION * POINTS_PER_TRI)]);
+  data.push(i);
 }
+
+console.log(data);
+console.log(pPos);
+console.log(pVel);
 
 const initializeWebGL = (canvasRef, windowWidth, windowHeight) => {
   if (!canvasRef.current) return null;
@@ -62,26 +69,33 @@ const compileShaders = gl => {
   const VERTEX_SHADER = `
   precision mediump float;
 
-  attribute vec2 a_pos;
-  attribute vec2 a_vel;
   attribute float a_idx;
-
+  
+  uniform vec2 u_pos[${NUM_POINTS}];
+  uniform vec2 u_vel[${NUM_POINTS}];
   uniform float u_time;
   uniform float u_radius;
   uniform float u_resolution;
   uniform float u_scale;
 
   #define PI radians(180.0)
+  #define NUM_POINTS ${NUM_POINTS}
   
   void main() {
-    vec2 pos = a_pos + (a_vel * u_time);
+    float vertsPerParticle = u_resolution * 3.0;
+    float pIdx = floor(a_idx / vertsPerParticle);
+
+    vec2 pos = u_pos[int(pIdx)] + (u_vel[int(pIdx)] * u_time);
+
     float w = 2.0 + u_radius + u_radius;
     float hw = w / 2.0;
     float x = mod(pos.x, w) - hw;
     float y = mod(pos.y, w) - hw;
 
-    float triIdx = floor(a_idx / 3.0);
-    float triVertexId = mod(a_idx, 3.0);
+    float mIdx = mod(a_idx, u_resolution * 3.0);
+
+    float triIdx = floor(mIdx / 3.0);
+    float triVertexId = mod(mIdx, 3.0);
     float edgeId = triVertexId + triIdx;
     float angle = edgeId / u_resolution * PI * 2.0;
     float radius = step(triVertexId, 1.5) * u_radius;
@@ -161,38 +175,24 @@ const Particles = ({ windowHeight, windowWidth }) => {
     gl.bindBuffer(gl.ARRAY_BUFFER, dataBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
 
-    const posLoc = gl.getAttribLocation(program, "a_pos");
-    const velLoc = gl.getAttribLocation(program, "a_vel");
     const idxLoc = gl.getAttribLocation(program, "a_idx");
 
-    gl.vertexAttribPointer(
-      posLoc,
-      2,
-      gl.FLOAT,
-      gl.FALSE,
-      DATA_COUNT * Float32Array.BYTES_PER_ELEMENT,
-      0
-    );
-    gl.vertexAttribPointer(
-      velLoc,
-      2,
-      gl.FLOAT,
-      gl.FALSE,
-      DATA_COUNT * Float32Array.BYTES_PER_ELEMENT,
-      2 * Float32Array.BYTES_PER_ELEMENT
-    );
     gl.vertexAttribPointer(
       idxLoc,
       1,
       gl.FLOAT,
       gl.FALSE,
       DATA_COUNT * Float32Array.BYTES_PER_ELEMENT,
-      4 * Float32Array.BYTES_PER_ELEMENT
+      0
     );
   
-    gl.enableVertexAttribArray(posLoc);
-    gl.enableVertexAttribArray(velLoc);
     gl.enableVertexAttribArray(idxLoc);
+
+    const posLoc = gl.getUniformLocation(program, "u_pos");
+    gl.uniform2fv(posLoc, new Float32Array(pPos));
+
+    const velLoc = gl.getUniformLocation(program, "u_vel");
+    gl.uniform2fv(velLoc, new Float32Array(pVel));
 
     const diamLoc = gl.getUniformLocation(program, "u_radius");
     gl.uniform1f(diamLoc, RADIUS);
