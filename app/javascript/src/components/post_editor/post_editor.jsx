@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useState } from "react";
-import { withAuth } from "../hocs";
+import { withAuth, withMenu } from "../hocs";
 
 import { 
   Container, 
@@ -7,6 +7,8 @@ import {
   Input,
   Segment
 } from "semantic-ui-react";
+
+import { Navbar } from "../dashboard";
 
 import { createEditor } from "slate";
 
@@ -90,4 +92,4 @@ const PostEditor = () => {
   );
 };
 
-export default withAuth(PostEditor, { requireAdmin: true });
+export default withAuth(withMenu(PostEditor, Navbar), { requireAdmin: true });

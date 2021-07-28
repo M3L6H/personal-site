@@ -11,10 +11,26 @@ import { deleteSession } from "../../actions/session_actions";
 const Navbar = (props) => {
   const { user, computer, attached, signout } = props;
 
+  const items = [
+    {
+      link: "/dashboard",
+      text: "Dashboard"
+    },
+    {
+      link: "/dashboard/create-post",
+      text: "Create Post"
+    },
+    {
+      onClick: signout,
+      text: "Sign Out"
+    }
+  ];
+
   return (
     <Menu
       attached={ attached }
       inverted
+      className="dashboard-navbar"
     >
       <Menu.Item
         header
@@ -24,25 +40,30 @@ const Navbar = (props) => {
       </Menu.Item>
 
       <Menu.Menu position="right">
-        { computer ? (<>
-          <Menu.Item
-          >
-            <Link to="/dashboard/create-post">Create Post</Link>
-          </Menu.Item>
-          <Menu.Item
-            onClick={ signout }
-          >
-            Sign Out
-          </Menu.Item>
-        </>) : (
+        { computer ? (<>{
+          items.map(({ link, text, onClick }) => (
+            <Menu.Item onClick={ onClick } key={ text }>
+              { link ? (
+                <Link to={ link }>{ text }</Link>
+              ) : (
+                text
+              )}
+            </Menu.Item>
+          ))
+        }</>) : (
           <Dropdown item icon="bars">
             <Dropdown.Menu>
-              <Dropdown.Item>
-              <Link to="/dashboard/create-post">Create Post</Link>
-              </Dropdown.Item>
-              <Dropdown.Item onClick={ signout }>
-                Sign Out
-              </Dropdown.Item>
+              {
+                items.map(({ link, text, onClick }) => (
+                  <Dropdown.Item onClick={ onClick } key={ text }>
+                    { link ? (
+                      <Link className="dropdown-link" to={ link }>{ text }</Link>
+                    ) : (
+                      text
+                    )}
+                  </Dropdown.Item>
+                ))
+              }
             </Dropdown.Menu>
           </Dropdown>
         ) }

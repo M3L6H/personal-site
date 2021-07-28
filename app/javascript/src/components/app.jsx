@@ -29,7 +29,7 @@ const App = () => {
           <Blog />
         </Route>
         <Route path="/dashboard/create-post">
-          <PostEditor />
+          <PostEditor inverted />
         </Route>
         <Route path="/dashboard">
           <Dashboard inverted />
