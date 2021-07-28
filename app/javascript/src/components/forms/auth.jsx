@@ -13,7 +13,7 @@ import {
 
 import { createSession } from "../../actions/session_actions";
 
-const Auth = ({ type, open, setOpen, signIn, signUp, message, obstruct }) => {
+const Auth = ({ type, open, setOpen, signIn, signUp, message, obstruct, errors }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -55,6 +55,10 @@ const Auth = ({ type, open, setOpen, signIn, signUp, message, obstruct }) => {
               required={ type === "signup" }
               value={ username }
               onChange={ (_, { value }) => setUsername(value) }
+              error={ errors && "username" in errors && {
+                content: errors.username,
+                pointing: "below"
+              }}
             />
             <Form.Input 
               label="Password"
@@ -62,6 +66,10 @@ const Auth = ({ type, open, setOpen, signIn, signUp, message, obstruct }) => {
               required={ type === "signup" }
               value={ password }
               onChange={ (_, { value }) => setPassword(value) }
+              error={ errors && "password" in errors && {
+                content: errors.password,
+                pointing: "below"
+              }}
             />
             <Button 
               fluid
@@ -77,13 +85,21 @@ const Auth = ({ type, open, setOpen, signIn, signUp, message, obstruct }) => {
               </Message.Content>
             </Message>
           }
+          {
+            errors && "error" in errors &&
+            <Message attached="bottom" error icon>
+              <Icon name="warning" />
+              <Message.Content>{ errors.error }</Message.Content>
+            </Message>
+          }
         </Modal.Description>
       </Modal.Content>
     </Modal>
   );
 };
 
-const mapStateToProps = (_, ownProps) => ({
+const mapStateToProps = ({ errors: { session } }, ownProps) => ({
+  errors: session,
   ...ownProps
 });
 

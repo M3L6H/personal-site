@@ -50,7 +50,7 @@ class User < ApplicationRecord
       user = self.find_by(username: username) || self.find_by(email: username)
 
       # Return user only if the password is correct
-      user if user.is_password?(password) 
+      user if !user.nil? && user.is_password?(password) 
     end
   end
 

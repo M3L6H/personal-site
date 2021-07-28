@@ -23,7 +23,7 @@ class Api::SessionsController < ApplicationController
       logout
       render json: {}, status: 200
     else
-      render json: { errors: "Not logged in" }, status: 403
+      render json: { error: "Not logged in" }, status: 403
     end
   end
 end
