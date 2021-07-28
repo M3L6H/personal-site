@@ -24,15 +24,22 @@ const Navbar = (props) => {
       </Menu.Item>
 
       <Menu.Menu position="right">
-        { computer ? (
+        { computer ? (<>
+          <Menu.Item
+          >
+            <Link to="/dashboard/create-post">Create Post</Link>
+          </Menu.Item>
           <Menu.Item
             onClick={ signout }
           >
             Sign Out
           </Menu.Item>
-        ) : (
+        </>) : (
           <Dropdown item icon="bars">
             <Dropdown.Menu>
+              <Dropdown.Item>
+              <Link to="/dashboard/create-post">Create Post</Link>
+              </Dropdown.Item>
               <Dropdown.Item onClick={ signout }>
                 Sign Out
               </Dropdown.Item>
