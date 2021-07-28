@@ -1,8 +1,8 @@
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import { clearFlash } from '../../actions/flash_actions';
+import { clearFlash } from "../../actions/flash_actions";
 
-import Flash from './flash';
+import Flash from "./flash";
 
 const mapStateToProps = ({ flash }) => ({
   flash

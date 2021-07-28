@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { withAuth, withMenu } from '../hocs';
+import React, { useEffect } from "react";
+import { withAuth, withMenu } from "../hocs";
 
-import { Container } from 'semantic-ui-react';
+import { Container } from "semantic-ui-react";
 
-import Navbar from './navbar';
-import { BioForm, ProfilePhotoForm, ProjectForm, SkillForm } from '../forms';
+import Navbar from "./navbar";
+import { BioForm, ProfilePhotoForm, ProjectForm, SkillForm } from "../forms";
 
 const Dashboard = ({ fetchSubject }) => {
   useEffect(() => {

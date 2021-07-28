@@ -1,8 +1,8 @@
-import React, { useState, useCallback } from 'react';
-import { useDropzone } from 'react-dropzone';
-import { connect } from 'react-redux';
-import { receiveFlash, ERROR, SUCCESS } from '../../actions/flash_actions';
-import { updateUser, RECEIVE_USERS_ERRORS } from '../../actions/users_actions';
+import React, { useState, useCallback } from "react";
+import { useDropzone } from "react-dropzone";
+import { connect } from "react-redux";
+import { receiveFlash, ERROR, SUCCESS } from "../../actions/flash_actions";
+import { updateUser, RECEIVE_USERS_ERRORS } from "../../actions/users_actions";
 
 import {
   Grid,
@@ -10,7 +10,7 @@ import {
   Icon,
   Image,
   Segment
-} from 'semantic-ui-react';
+} from "semantic-ui-react";
 
 const ProfilePhotoForm = ({ user, setFlash, updateUser }) => {
   const [value, setValue] = useState(null);

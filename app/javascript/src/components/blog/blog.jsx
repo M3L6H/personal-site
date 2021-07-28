@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import { Container } from 'semantic-ui-react';
+import { Container } from "semantic-ui-react";
 
 export default () => {
   return (

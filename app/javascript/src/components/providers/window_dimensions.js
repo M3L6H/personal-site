@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 import { 
   MOBILE, 
@@ -6,8 +6,8 @@ import {
   COMPUTER, 
   LARGE_SCREEN, 
   WIDE_SCREEN 
-} from '../../util/constants';
-import debounce from '../../util/debouncer';
+} from "../../util/constants";
+import debounce from "../../util/debouncer";
 
 const w = window.innerWidth;
 

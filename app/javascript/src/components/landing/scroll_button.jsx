@@ -1,9 +1,9 @@
-import React from 'react';
-import Anime from 'react-anime';
+import React from "react";
+import Anime from "react-anime";
 
-import { Icon } from 'semantic-ui-react';
+import { Icon } from "semantic-ui-react";
 
-import anime from 'animejs';
+import anime from "animejs";
 
 const animProps = {
   keyframes: [
@@ -36,7 +36,7 @@ export default ({ aboutRef }) => {
               update: anim => {
                 window.scrollTo(0, anim.animations[0].currentValue);
               }
-            })
+            });
           } }
         />
       </Anime>

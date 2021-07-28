@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { useState } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
-import { receiveFlash, ERROR } from '../../actions/flash_actions';
+import { receiveFlash, ERROR } from "../../actions/flash_actions";
 
-import { AuthForm } from '../forms';
+import { AuthForm } from "../forms";
 
 const mapStateToProps = (state, ownProps) => ({
   currentUser: state.entities.users[state.session.currentUserId],

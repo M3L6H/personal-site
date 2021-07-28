@@ -1,8 +1,8 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef } from "react";
 
-import { Container, Header } from 'semantic-ui-react';
+import { Container, Header } from "semantic-ui-react";
 
-import { ContactForm } from '../forms';
+import { ContactForm } from "../forms";
 
 export default forwardRef((props, ref) => {
   return (

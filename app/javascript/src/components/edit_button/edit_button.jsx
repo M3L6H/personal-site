@@ -1,7 +1,7 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
+import React from "react";
+import { withRouter } from "react-router-dom";
 
-import { Button } from 'semantic-ui-react';
+import { Button } from "semantic-ui-react";
 
 const editButton = ({ user, history, route }) => {
   if (!user || !user.admin) return null;

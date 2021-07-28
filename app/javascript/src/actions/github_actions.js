@@ -1,4 +1,4 @@
-import * as APIUtil from '../util/github_util';
+import * as APIUtil from "../util/github_util";
 
 export const RECEIVE_COMMITS = "RECEIVE_COMMITS";
 
@@ -22,9 +22,9 @@ export const fetchCommits = (projects) => dispatch => {
         --count;
 
         // Only update redux state when we have finished all our requests
-        if (count === 0) {
+        if (count === 0) 
           dispatch(receiveCommits(commits));
-        }
+        
       });
   });
 };

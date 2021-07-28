@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import { Segment } from 'semantic-ui-react';
+import { Segment } from "semantic-ui-react";
 
 export default (Component, Menu) => {
   return (props) => {
