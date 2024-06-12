@@ -2,7 +2,7 @@ import {
   RECEIVE_SESSION_ERRORS, 
   RECEIVE_SESSION, 
   REMOVE_SESSION 
-} from '../actions/session_actions';
+} from "../actions/session_actions";
 
 export default (state={}, { type, errors }) => {
   Object.freeze(state);

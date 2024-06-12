@@ -1,13 +1,13 @@
-import React, { useRef, useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useRef, useState } from "react";
+import { connect } from "react-redux";
 
-import { createContact } from '../../util/contact_util';
-import { receiveFlash, SUCCESS, ERROR } from '../../actions/flash_actions';
+import { createContact } from "../../util/contact_util";
+import { receiveFlash, SUCCESS, ERROR } from "../../actions/flash_actions";
 
-import { Button, Form, Input } from 'semantic-ui-react';
-import ReCAPTCHA from 'react-google-recaptcha';
+import { Button, Form } from "semantic-ui-react";
+import ReCAPTCHA from "react-google-recaptcha";
 
-import TextareaAutosize from 'react-textarea-autosize';
+import TextareaAutosize from "react-textarea-autosize";
 
 const ContactForm = ({ setFlash }) => {
   const [name, setName] = useState("");

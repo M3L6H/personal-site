@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { WindowContext } from '../providers/window_dimensions';
+import React, { useContext } from "react";
+import { WindowContext } from "../providers/window_dimensions";
 
 export default (Component) => {
   return props => {

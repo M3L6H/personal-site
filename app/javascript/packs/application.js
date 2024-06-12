@@ -16,5 +16,5 @@
 // const imagePath = (name) => images(name, true)
 
 import "semantic-ui-css/semantic.min.css";
-import "./application.scss"
+import "./application.scss";
 import "./index.jsx";

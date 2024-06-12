@@ -1,6 +1,6 @@
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import EditButton from './edit_button';
+import EditButton from "./edit_button";
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,

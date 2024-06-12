@@ -2,7 +2,7 @@ import {
   RECEIVE_SKILLS_ERRORS, 
   RECEIVE_SKILL, 
   REMOVE_SKILL 
-} from '../actions/skills_actions';
+} from "../actions/skills_actions";
 
 export default (state={}, { type, errors }) => {
   Object.freeze(state);

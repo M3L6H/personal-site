@@ -1,4 +1,4 @@
-import { RECEIVE_FLASH, CLEAR_FLASH } from '../actions/flash_actions';
+import { RECEIVE_FLASH, CLEAR_FLASH } from "../actions/flash_actions";
 
 export default (state={}, { type, flash }) => {
   Object.freeze(state);

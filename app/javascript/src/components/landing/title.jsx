@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Anime from 'react-anime';
+import React, { Component } from "react";
+import Anime from "react-anime";
 
-import { Header } from 'semantic-ui-react';
+import { Header } from "semantic-ui-react";
 
 const titles = [
   "Software Engineer",

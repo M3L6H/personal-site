@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useRef } from 'react';
-import { useDropzone } from 'react-dropzone';
+import React, { useState, useCallback, useRef } from "react";
+import { useDropzone } from "react-dropzone";
 
 import {
   Button,
@@ -9,9 +9,9 @@ import {
   Icon,
   Image,
   Segment
-} from 'semantic-ui-react';
+} from "semantic-ui-react";
 
-import withWindowDimensions from '../hocs/with_window_dimensions';
+import withWindowDimensions from "../hocs/with_window_dimensions";
 
 const ImageSelect = (props) => {
   const { value, onChange, computer } = props;
@@ -26,9 +26,9 @@ const ImageSelect = (props) => {
     const fileReader = new FileReader();
 
     fileReader.onloadend = () => {
-      if (!onChange) {
+      if (!onChange) 
         setStateValue(file);
-      }
+      
 
       setLoading(false);
       setPhotoUrl(fileReader.result);
@@ -39,9 +39,9 @@ const ImageSelect = (props) => {
       setLoading(true);
     }
 
-    if (onChange) {
+    if (onChange) 
       onChange(e, { value: file });
-    }
+    
   };
 
   const onDrop = useCallback(handleFiles, []);

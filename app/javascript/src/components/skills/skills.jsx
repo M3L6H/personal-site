@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { withWindowDimensions } from '../hocs';
+import React, { useState } from "react";
+import { withWindowDimensions } from "../hocs";
 
-import { Button, Container, Header, Label, Segment } from 'semantic-ui-react';
+import { Button, Container, Header, Label, Segment } from "semantic-ui-react";
 
-import { CATEGORIES, COLORS } from '../../util/constants';
-import capitalize from '../../util/capitalize';
+import { CATEGORIES, COLORS } from "../../util/constants";
+import capitalize from "../../util/capitalize";
 
-import Filter from './filter';
+import Filter from "./filter";
 
 const compare = (a, b) => {
   if (a.name < b.name) return -1;

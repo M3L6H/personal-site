@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef } from "react";
 
 import {
   Container,
@@ -9,9 +9,9 @@ import {
   Label,
   Popup,
   Segment
-} from 'semantic-ui-react';
+} from "semantic-ui-react";
 
-import Skills from '../skills';
+import Skills from "../skills";
 
 export default forwardRef(({ user }, ref) => {
   return (

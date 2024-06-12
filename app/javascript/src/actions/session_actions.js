@@ -16,7 +16,7 @@ const removeSession = () => ({
 
 const receiveSessionErrors = (errors) => ({
   type: RECEIVE_SESSION_ERRORS,
-  session: errors
+  errors
 });
 
 export const createSession = (user) => dispatch => (

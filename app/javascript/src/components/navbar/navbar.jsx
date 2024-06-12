@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
-import _ from 'lodash';
-import { withWindowDimensions } from '../hocs';
+import React, { useState, useRef, useEffect } from "react";
+import _ from "lodash";
+import { withWindowDimensions } from "../hocs";
 
-import { Menu } from 'semantic-ui-react';
+import { Menu } from "semantic-ui-react";
 
-import anime from 'animejs';
+import anime from "animejs";
 
 const Navbar = ({ pageRefs }) => {
   const [active, setActive] = useState("home");
@@ -18,12 +18,12 @@ const Navbar = ({ pageRefs }) => {
     const navRect = containerRef.current.getBoundingClientRect();
     const eltHeight = navRect.top - bodyRect.top;
     
-    const scrollHandler = _.throttle(e => {
-      if (window.scrollY >= eltHeight) {
+    const scrollHandler = _.throttle(() => {
+      if (window.scrollY >= eltHeight) 
         navRef.current.classList.add("stick");
-      } else {
+       else 
         navRef.current.classList.remove("stick");
-      }
+      
 
       for (let i = pageRefs.length - 1; i >= 0; --i) {
         if (pageRefs[i].current) {
@@ -64,7 +64,7 @@ const Navbar = ({ pageRefs }) => {
                     update: anim => {
                       window.scrollTo(0, anim.animations[0].currentValue);
                     }
-                  })
+                  });
                 } }
               />
             ))

@@ -1,6 +1,6 @@
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import About from './about';
+import About from "./about";
 
 const mapStateToProps = (state) => ({
   user: state.entities.subject

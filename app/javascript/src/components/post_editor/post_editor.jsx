@@ -1,16 +1,18 @@
-import React, { useMemo, useRef, useState } from 'react';
-import { withAuth } from '../hocs';
+import React, { useMemo, useRef, useState } from "react";
+import { withAuth, withMenu } from "../hocs";
 
 import { 
   Container, 
   Header, 
   Input,
   Segment
-} from 'semantic-ui-react';
+} from "semantic-ui-react";
 
-import { createEditor } from 'slate';
+import { Navbar } from "../dashboard";
 
-import { Slate, Editable, withReact } from 'slate-react';
+import { createEditor } from "slate";
+
+import { Slate, Editable, withReact } from "slate-react";
 
 const PostEditor = () => {
   const editor = useMemo(() => withReact(createEditor()), []);
@@ -31,7 +33,7 @@ const PostEditor = () => {
     switch(e.currentTarget.data["type"]) {
       case "title":
         val = e.currentTarget.value;
-        setTitle(e.currentTarget.value);
+        setTitle(val);
         break;
       case "document":
         val = other.value || e.currentTarget.value;
@@ -41,8 +43,8 @@ const PostEditor = () => {
         return;
     }
 
-    setSaving(true);
-    clearTimeout(saveTimeout.current);
+    // setSaving(true);
+    // clearTimeout(saveTimeout.current);
 
     saveTimeout.current = setTimeout(() => {
       // const formData = new FormData();
@@ -65,7 +67,7 @@ const PostEditor = () => {
     
       //     if (didMountRef.current) setSaving(false);
       //   });
-    }, 1200)
+    }, 1200);
   };
 
   return (
@@ -90,4 +92,4 @@ const PostEditor = () => {
   );
 };
 
-export default withAuth(PostEditor, { requireAdmin: true });
+export default withAuth(withMenu(PostEditor, Navbar), { requireAdmin: true });

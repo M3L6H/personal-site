@@ -1,7 +1,7 @@
 import {
   RECEIVE_POSTS,
   RECEIVE_POST
-} from '../actions/posts_actions';
+} from "../actions/posts_actions";
 
 export default (state={}, action) => {
   Object.freeze(state);

@@ -3,9 +3,9 @@ export default (str, len=128) => {
 
   let truncated = str.slice(0, len - 3);
 
-  while (truncated.match(/[^\w]$/)) {
+  while (truncated.match(/[^\w]$/)) 
     truncated = truncated.slice(0, truncated.length - 1);
-  }
+  
 
   return truncated + "...";
-}
+};

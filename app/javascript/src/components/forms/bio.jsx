@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { connect } from 'react-redux';
-import { receiveFlash, ERROR, SUCCESS } from '../../actions/flash_actions';
-import { updateUser, RECEIVE_USERS_ERRORS } from '../../actions/users_actions';
+import React, { useState, useEffect, useRef } from "react";
+import { connect } from "react-redux";
+import { receiveFlash, ERROR, SUCCESS } from "../../actions/flash_actions";
+import { updateUser, RECEIVE_USERS_ERRORS } from "../../actions/users_actions";
 
-import TextareaAutosize from 'react-textarea-autosize';
+import TextareaAutosize from "react-textarea-autosize";
 import {
   Form,
   Header,
   Icon,
   Label,
   Segment
-} from 'semantic-ui-react';
+} from "semantic-ui-react";
 
 const BioForm = ({ user, updateUser, setFlash }) => {
   // Should never happen, but just in case
@@ -56,7 +56,7 @@ const BioForm = ({ user, updateUser, setFlash }) => {
     
           if (didMountRef.current) setSaving(false);
         });
-    }, 1200)
+    }, 1200);
   };
 
   return (
