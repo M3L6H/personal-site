@@ -1,11 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import { Container } from 'semantic-ui-react';
+import { Container } from "semantic-ui-react";
 
-export default () => {
+const Blog = () => {
   return (
     <Container text className="blog">
 
     </Container>
   );
 };
+
+export default Blog;

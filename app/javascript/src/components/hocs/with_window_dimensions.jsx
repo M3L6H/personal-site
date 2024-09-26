@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import { WindowContext } from '../providers/window_dimensions';
+import React, { useContext } from "react";
+import { WindowContext } from "../providers/window_dimensions";
 
-export default (Component) => {
-  return props => {
+const withWindowDimensions = (Component) => {
+  const WithWindowDimensionsWrapper = props => {
     const window = useContext(WindowContext);
     
     const childProps = {
@@ -12,4 +12,11 @@ export default (Component) => {
 
     return <Component { ...childProps } />;
   };
+
+  WithWindowDimensionsWrapper.displayName = "WithWindowDimensionsWrapper";
+  
+  return WithWindowDimensionsWrapper;
 };
+
+
+export default withWindowDimensions;

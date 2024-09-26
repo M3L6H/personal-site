@@ -1,4 +1,4 @@
-import * as APIUtil from '../util/skills_util';
+import * as APIUtil from "../util/skills_util";
 
 export const RECEIVE_SKILL = "RECEIVE_SKILL";
 export const REMOVE_SKILL = "REMOVE_SKILL";

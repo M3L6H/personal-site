@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from "react";
+import { connect } from "react-redux";
 
 import {
   createSkill, 
   updateSkill,
   deleteSkill,
   RECEIVE_SKILLS_ERRORS
-} from '../../actions/skills_actions';
+} from "../../actions/skills_actions";
 
-import { Button, Form, Header, Icon, Label, Segment, Select } from 'semantic-ui-react';
+import { Button, Form, Header, Icon, Label, Segment, Select } from "semantic-ui-react";
 
-import { CATEGORIES, COLORS } from '../../util/constants';
-import capitalize from '../../util/capitalize';
+import { CATEGORIES, COLORS } from "../../util/constants";
+import capitalize from "../../util/capitalize";
 
 const examples = ["C++", "React", "Rails", "Ruby", "Unity"];
 
@@ -29,19 +29,19 @@ const SkillForm = ({ skills, createSkill, updateSkill, deleteSkill, errors }) =>
     if (!updating) {
       createSkill({ name: skill, category })
         .then(({ type }) => {
-          if (type !== RECEIVE_SKILLS_ERRORS) {
+          if (type !== RECEIVE_SKILLS_ERRORS) 
             setSkill("");
-          }
+          
         });
     } else {
       updateSkill({ id: updating.id, name: skill, category })
         .then(({ type }) => {
-          if (type !== RECEIVE_SKILLS_ERRORS) {
+          if (type !== RECEIVE_SKILLS_ERRORS) 
             cancelUpdate();
-          }
+          
         });
     }
-  }
+  };
 
   return (
     <Segment>

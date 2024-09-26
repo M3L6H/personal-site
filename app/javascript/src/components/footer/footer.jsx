@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import { Icon } from 'semantic-ui-react';
+import { Icon } from "semantic-ui-react";
 
-export default () => {
+const Footer = () => {
   return (
     <div className="footer">
       <span className="footer-left">
         <span className="license">
-          Licensed under <a href="https://github.com/M3L6H/personal-site/blob/master/LICENSE.md" target="_blank">the GNU GPL 3.0</a>
+          Licensed under <a href="https://github.com/M3L6H/personal-site/blob/master/LICENSE.md" target="_blank" rel="noreferrer">the GNU GPL 3.0</a>
         </span>
         <span className="name">
           Michael Hollingworth
@@ -20,3 +20,7 @@ export default () => {
     </div>
   );
 };
+
+Footer.displayName = "Footer";
+
+export default Footer;

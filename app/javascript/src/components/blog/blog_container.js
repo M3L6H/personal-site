@@ -1,12 +1,12 @@
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import Blog from './blog';
+import Blog from "./blog";
 
-const mapStateToProps = state => ({
+const mapStateToProps = () => ({
 
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = () => ({
 
 });
 

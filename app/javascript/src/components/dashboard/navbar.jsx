@@ -1,12 +1,12 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-import { Dropdown, Menu } from 'semantic-ui-react';
+import { Dropdown, Menu } from "semantic-ui-react";
 
-import { withWindowDimensions } from '../hocs';
+import { withWindowDimensions } from "../hocs";
 
-import { deleteSession } from '../../actions/session_actions';
+import { deleteSession } from "../../actions/session_actions";
 
 const Navbar = (props) => {
   const { user, computer, attached, signout } = props;

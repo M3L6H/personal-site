@@ -1,11 +1,11 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
-import { WindowDimensionProvider } from './providers';
+import React from "react";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { WindowDimensionProvider } from "./providers";
 
-import App from './app';
+import App from "./app";
 
-export default ({ store }) => {
+const Root = ({ store }) => {
   return (
     <Provider store={ store }>
       <BrowserRouter>
@@ -16,3 +16,7 @@ export default ({ store }) => {
     </Provider>
   );
 };
+
+Root.displayName = "Root";
+
+export default Root;

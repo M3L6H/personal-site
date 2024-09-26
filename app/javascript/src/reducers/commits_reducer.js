@@ -1,4 +1,4 @@
-import { RECEIVE_COMMITS } from '../actions/github_actions';
+import { RECEIVE_COMMITS } from "../actions/github_actions";
 
 export default (state={}, { type, commits }) => {
   Object.freeze(state);

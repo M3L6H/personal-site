@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from "react";
+import { connect } from "react-redux";
 
-import { createProject, RECEIVE_PROJECT_ERRORS } from '../../actions/projects_actions';
-import { receiveFlash, SUCCESS } from '../../actions/flash_actions';
+import { createProject, RECEIVE_PROJECT_ERRORS } from "../../actions/projects_actions";
+import { receiveFlash, SUCCESS } from "../../actions/flash_actions";
 
-import TextareaAutosize from 'react-textarea-autosize';
+import TextareaAutosize from "react-textarea-autosize";
 import {
   Button,
   Form,
   Header,
   Input,
   Segment
-} from 'semantic-ui-react';
+} from "semantic-ui-react";
 
-import { ImageSelect, LimitedInput, LimitedTextarea } from '../controls';
+import { ImageSelect, LimitedInput, LimitedTextarea } from "../controls";
 
 const ProjectForm = ({ type, createProject, setFlash }) => {
   const [title, setTitle] = useState("");
@@ -25,9 +25,9 @@ const ProjectForm = ({ type, createProject, setFlash }) => {
   
   let actionText = "Create Project";
 
-  if (type === "edit") {
+  if (type === "edit") 
     actionText = "Update Project";
-  }
+  
 
   const handleSubmit = e => {
     e.preventDefault();

@@ -1,16 +1,16 @@
-import React, { useMemo, useRef, useState } from 'react';
-import { withAuth } from '../hocs';
+import React, { useMemo, useRef, useState } from "react";
+import { withAuth } from "../hocs";
 
 import { 
   Container, 
   Header, 
   Input,
   Segment
-} from 'semantic-ui-react';
+} from "semantic-ui-react";
 
-import { createEditor } from 'slate';
+import { createEditor } from "slate";
 
-import { Slate, Editable, withReact } from 'slate-react';
+import { Slate, Editable, withReact } from "slate-react";
 
 const PostEditor = () => {
   const editor = useMemo(() => withReact(createEditor()), []);
@@ -41,7 +41,7 @@ const PostEditor = () => {
         return;
     }
 
-    setSaving(true);
+    // setSaving(true);
     clearTimeout(saveTimeout.current);
 
     saveTimeout.current = setTimeout(() => {
@@ -65,7 +65,7 @@ const PostEditor = () => {
     
       //     if (didMountRef.current) setSaving(false);
       //   });
-    }, 1200)
+    }, 1200);
   };
 
   return (

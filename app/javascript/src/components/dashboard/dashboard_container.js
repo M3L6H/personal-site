@@ -1,8 +1,8 @@
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import { fetchSubject } from '../../actions/subject_actions';
+import { fetchSubject } from "../../actions/subject_actions";
 
-import Dashboard from './dashboard';
+import Dashboard from "./dashboard";
 
 const mapDispatchToProps = (dispatch) => ({
   fetchSubject: () => dispatch(fetchSubject())

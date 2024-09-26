@@ -1,10 +1,10 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef } from "react";
 
-import { Container, Header } from 'semantic-ui-react';
+import { Container, Header } from "semantic-ui-react";
 
-import { ContactForm } from '../forms';
+import { ContactForm } from "../forms";
 
-export default forwardRef((props, ref) => {
+const Contact = forwardRef((props, ref) => {
   return (
     <section className="contact" ref={ ref }>
       <Container text>
@@ -14,3 +14,7 @@ export default forwardRef((props, ref) => {
     </section>
   );
 });
+
+Contact.displayName = "Contact";
+
+export default Contact;

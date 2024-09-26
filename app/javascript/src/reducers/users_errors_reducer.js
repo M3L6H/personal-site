@@ -2,7 +2,7 @@ import {
   RECEIVE_USERS_ERRORS, 
   RECEIVE_USER, 
   REMOVE_USER 
-} from '../actions/users_actions';
+} from "../actions/users_actions";
 
 export default (state={}, { type, errors }) => {
   Object.freeze(state);

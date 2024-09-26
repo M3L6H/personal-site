@@ -1,18 +1,18 @@
-import React, { useEffect, useRef } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { useEffect, useRef } from "react";
+import { withRouter } from "react-router-dom";
 
-import { ERROR, SUCCESS } from '../../actions/flash_actions';
+import { ERROR, SUCCESS } from "../../actions/flash_actions";
 
-import { Message } from 'semantic-ui-react';
+import { Message } from "semantic-ui-react";
 
 const Flash = ({ flash, clearFlash, location }) => {
   const { message, type, hidden, persist } = flash;
 
   const prevLocation = useRef();
   useEffect(() => {
-    if (!persist && location !== prevLocation.current && !hidden) {
+    if (!persist && location !== prevLocation.current && !hidden) 
       clearFlash();
-    }
+    
     prevLocation.current = location;
   }, [location]);
 
@@ -25,6 +25,6 @@ const Flash = ({ flash, clearFlash, location }) => {
       negative={ type === ERROR }
     />
   );
-}
+};
 
 export default withRouter(Flash);
